@@ -1,0 +1,95 @@
+Pau Alos Mairal
+Carlota Catot Bragos
+Gerard Esteve Villuendas
+Dragos Fotescu
+
+
+Correcciones a la primera entrega
+---------------------------------
+
+ANALISIS:
+********
+
+Vuestro analisis esta bien en general, pero faltan cosas.
+
+Un primer detalle, en el diagrama de objetivos no habeis incluido un objetivo
+que corresponda al pago a la tienda externa cuando se hace una compra o
+
+En el objetivo "inciar devolucion" en la descripcion incluis bastantes cosas
+(de hecho es uno de los pocos objetivos que habeis comentado en el PDT),
+deberíais hacer un nivel de refinamiento mayor en este objetivo. Pensad que
+una de estas cosas es la devolucion del dinero al comprador.
+
+El rol transportista es un poco mas complicado y deberia ponerse en marcha
+no cuando se realiza una compra sino cuando un centro logistico tiene
+paquetes suficientes para hacer un envio a un destino concreto o cuando
+el tiempo de entrega requiera que algo se envie lo antes posible. El
+indicar al usuario quien lleva el pedido no deberia estar a cargo del rol
+del centro logistico sino del que lleva el seguimiento del pedido individual.
+
+Fijaos tambien que hay todo un conjunto de tareas que estan en el envio que no
+estan reflejadas en el analisis, como que la tienda reparte las compras a
+los centros logisticos, estos deciden como agrupar los envios, se encargan de
+buscar empresas de transporte y deciden cual es la que les conviene.
+
+El gestor de pagos es algo que apareceria mas como un agente que como un rol,
+estais mezclado los pagos del proceso de compra y de devolucion, son tareas
+diferentes. Luego si os parece adecuado el mismo agente puede encargarse
+de los dos roles.
+
+No entiendo la accion "informar tienda valoraciones" del gestor de feedback.
+El sistema ha de pedir al usuario su opinion sobre algun producto y luego ha
+de procesar la respuesta, ahi se acaba la interaccion.
+
+DISEÑO DETALLADO:
+****************
+
+En el diagrama de datos, debeis ser mas exhaustivos al analizar la informacion
+que necesitan los roles. No solo es lo que se almacenara, sino tambien la
+informacion con la que toman decisiones. Por ejemplo, el transportista no
+necesita saber todo sobre un pedido, solo que hay un producto especifico que
+hay que enviar a una direccion, tampoco accederan a todos los pedidos ya que
+solo le importan los que enviara el.
+
+El gestionador de feedback no tiene que acceder a las facturas, y menos para
+escritura. El recomendador deberia acceder al historial de compras para hacer
+su recomendaciones.
+
+Los nombres de los agentes no son adecuados. Debeis tener la perspectiva de la
+tienda, desde esta no tiene sentido tener un agente usuario, o banco o
+transportista. El agente tienda es el todo, este agente se encarga de cosas
+concretas dentro de la tienda.
+
+Debeis pensar bien los criterios que usais para agrupar los roles en agentes.
+
+Por ejemplo, vuestro agente usuario agrupa cosas muy distintas, la busqueda
+de productos en la tienda, que recibira muchas peticiones y la inicia el
+comprador y la gestion del feedback que solo es de vez en cuando y la inicia la tienda.
+
+En el agente tienda teneis la recomendacion que se hace de manera periodica y
+las compras que se hace a peticion del usuario.
+
+No os digo que este mal o bien, sino que debeis pensar las razones por las que
+haceis esa agrupacion y si tienen sentido otras posibilidades.
+
+Os faltarian todo lo que aparezca como consecuencia de incluir las tareas que
+se realizan para la distribucion de los productos a los centros logisticos.
+
+El conjunto de protocolos que habeis puesto es correcto dada la forma en la
+que habeis agrupado los roles, pero quizas necesitareis cambiar/completar alguna
+cosa cuando completeis el analisis.
+
+-------------------
+
+Mi comentario es que no hay nada fundamentalmente incorrecto, pero debeis completar
+ciertas cosas como el analisis del proceso completo de la compra y añadir los roles
+que sean necesarios.
+
+Debeis pensar y justificar bien los criterios para agrupar los roles en agentes.
+
+Documentad mejor el analisis y diseño en el PDT ya que os deberia servir para hacer
+el diseño detallado y la implementacion. A partir de lo que documenteis tendreis
+mas claras las cosas que ha de hacer el sistema y como dividiros el trabajo.
+
+Podeis continuar trabajando, pero completad lo que os comento. Preguntadme si teneis
+alguna duda.

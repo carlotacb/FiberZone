@@ -1,0 +1,8 @@
+rdflib
+flask
+SPARQLWrapper
+semantics3
+bottlenose
+beautifulsoup4
+
+lxml

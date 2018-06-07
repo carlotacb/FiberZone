@@ -13,7 +13,6 @@ Asume que el agente de registro esta en el puerto 9000
 
 @author: javier
 """
-
 from __future__ import print_function
 from multiprocessing import Process, Queue
 import socket
@@ -21,8 +20,12 @@ import socket
 from rdflib import Namespace, Graph
 from flask import Flask, request
 
+import FIPAACLPerformatives
+from AgentUtil.ACLMessages import build_message
 from AgentUtil.FlaskServer import shutdown_server
+from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
+import requests
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -30,6 +33,10 @@ logging.basicConfig(level=logging.DEBUG)
 import os
 import bottlenose
 from bs4 import BeautifulSoup
+
+import random, OntologyConstants
+from orderRequest import  OrderRequest
+from rdflib.term import Literal
 
 amazon = bottlenose.Amazon(
     os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'], os.environ['AWS_ASSOCIATE_TAG'], Region='ES',
@@ -70,6 +77,8 @@ cola1 = Queue()
 # Flask stuff
 app = Flask(__name__)
 
+import logging
+logging.basicConfig(level=logging.INFO)
 
 @app.route("/comm")
 def comunicacion():
@@ -110,6 +119,36 @@ def search():
     except Exception as e: print(e)
 
     return response.prettify()
+
+#el grafo G tiene que contener toda la informacion
+#necesaria para realizar el pedido
+# por ejemplo, idPedido, idProducto, idPersona ...
+@app.route("/order/<idProd>")
+def newOrder(idProd):
+    """
+    Creates a new order with the idProd
+    :return:
+    """
+    print("Im in order func")
+
+    url ="http://127.0.0.1:" + "5000"+"/comm"
+
+    #    flights_url = disIP.flights_IP + str(Constants.PORT_AFlights) + "/comm"
+
+    messageDataGo = OrderRequest(random.randint(1, 2000), idProd)
+    gra = messageDataGo.to_graph()
+
+    dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST), Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(
+        format='xml')
+    print("before send request ")
+#gr = send_message( build_message(gmess, perf=ACL.request, sender=InfoAgent.uri, receiver=DirectoryAgent.uri, content=reg_obj, msgcnt=mss_cnt),
+#DirectoryAgent.address)
+    resp = requests.post(url, data=dataContent)
+
+    print("im here, resp:")
+    print(resp)
+    print(resp.text)
+    return resp.text
 
 
 

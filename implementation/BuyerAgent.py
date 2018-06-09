@@ -145,9 +145,9 @@ def newOrder(idProd):
 #DirectoryAgent.address)
     resp = requests.post(url, data=dataContent)
 
-    print("im here, resp:")
-    print(resp)
+    print("im here, resp:",resp)
     print(resp.text)
+    print("lets see the text")
     return resp.text
 
 

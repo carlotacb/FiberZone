@@ -8,18 +8,18 @@ import OntologyConstants
 from AgentUtil import ACLMessages
 from orderRequest import OrderRequest
 import socket
-
+import time
 
 
 # Configuration stuff
 hostname = socket.gethostname()
 port = 9011
+Lote = [] #cada 5 se vacia el lote y se envia
 
-
-
+precioBase = 10
+precioFinal = 0
 app = Flask(__name__)
-
-
+mensajeFecha = "Recibirás el pedido en 2 dias a partir de:"
 
 
 @app.route('/comm', methods=['GET', 'POST'])
@@ -28,21 +28,40 @@ def comunicacion():
     Entrypoint de comunicacion
     """
     print("here CLAgent comunicacion")
-    print(request.data)
-    print(request.args)
-
     graph = Graph().parse(data=request.data)
-
- #   ontology = ACLMessages.get_message_ontology(graph)
- #   if ontology == OntologyConstants.SEND_BUY_ORDER:
-    print( 'Its an plan request')
-    print(graph)
+    global precioBase
+    global precioFinal
+    global mensajeFecha
+    ahora = mensajeFecha
+    ahora += " "
+    ahora += time.strftime("%c")
+    print( 'Its a plan request')
     order = OrderRequest.from_graph(graph)
     print('Plan graph obtained, lets construct response message')
+   # print(order)
+    #if order.peso > 10:
+    peso = 11
+    if peso > 10:
+        precioBase += 2
+
+    Lote.append(order.product_id)
+    LoteFinal = Lote[:]
+    if len(Lote) == 5 :
+        #realizar envio
+        #vaciar lote
+        precioFinal = precioBase
+        precioBase = 10
+      #  LoteFinal[:] = Lote[:]
+        Lote[:] = []
+        LoteFinal.append(ahora)
+        LoteFinal.append(precioFinal)
+        print(ahora)
+        print(LoteFinal)
+        #return LoteFinal
+        return order.product_id
+
+    return len(Lote).__str__()
     return order.product_id
- #   else:
-  #      print ('I dont understand')
-  #      return ACLMessages.build_message(Graph(), Literal(FIPAACLPerformatives.NOT_UNDERSTOOD), Literal(""))
 
 
 if __name__ == '__main__':

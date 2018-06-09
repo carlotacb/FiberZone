@@ -4,8 +4,8 @@ import requests
 from flask import Flask, request, Response
 from rdflib import Graph
 
-import FIPAACLPerformatives
-import OntologyConstants
+import constants.FIPAACLPerformatives as FIPAACLPerformatives
+import constants.OntologyConstants as OntologyConstants
 from AgentUtil import ACLMessages
 from orderRequest import OrderRequest
 import socket

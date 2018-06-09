@@ -20,7 +20,7 @@ import socket
 from rdflib import Namespace, Graph
 from flask import Flask, request
 
-import FIPAACLPerformatives
+import constants.FIPAACLPerformatives as FIPAACLPerformatives
 from AgentUtil.ACLMessages import build_message
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
@@ -34,7 +34,7 @@ import os
 import bottlenose
 from bs4 import BeautifulSoup
 
-import random, OntologyConstants
+import random, constants.OntologyConstants as OntologyConstants
 from orderRequest import  OrderRequest
 from rdflib.term import Literal
 
@@ -148,6 +148,7 @@ def newOrder(idProd):
     print("im here, resp:")
     print(resp)
     print(resp.text)
+
     return resp.text
 
 

@@ -1,3 +1,4 @@
+# coding=utf-8
 from imaplib import Literal
 import requests
 from flask import Flask, request, Response

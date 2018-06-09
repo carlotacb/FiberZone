@@ -148,7 +148,7 @@ def newOrder(idProd):
     print("im here, resp:")
     print(resp)
     print(resp.text)
-    
+
     return resp.text
 
 

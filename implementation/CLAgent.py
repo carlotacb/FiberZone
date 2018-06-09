@@ -57,8 +57,7 @@ def comunicacion():
         LoteFinal.append(precioFinal)
         print(ahora)
         print(LoteFinal)
-        #return LoteFinal
-        return order.product_id
+        return str(LoteFinal)
 
     return len(Lote).__str__()
     return order.product_id

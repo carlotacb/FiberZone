@@ -21,12 +21,44 @@
     
 
 
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Analiza -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Analiza">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#HistorialBusqueda"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Contiene -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Contiene">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Pedido"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaBusqueda"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Da -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Da">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Recomendaciones"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envia -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envia">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaDevolucion"/>
     </owl:ObjectProperty>
     
 
@@ -41,12 +73,72 @@
     
 
 
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Genera -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Genera">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Transportista"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#OfertaTransportista"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#GeneraUna -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#GeneraUna">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionBusqueda"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaBusqueda"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#GuardadoEn -->
 
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#GuardadoEn">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionBusqueda"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#HistorialBusqueda"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Introduce -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Introduce">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Feedback"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#LeLlegan -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#LeLlegan">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Recomendaciones"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Paga -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Paga">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Prepara -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Prepara">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#CentroLogistico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Lote"/>
     </owl:ObjectProperty>
     
 
@@ -58,6 +150,7 @@
         <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionBusqueda"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionCompra"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion"/>
     </owl:ObjectProperty>
     
 
@@ -67,7 +160,51 @@
     <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Recibe">
         <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
         <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura"/>
         <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaBusqueda"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaDevolucion"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RecibeUna -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RecibeUna">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#CentroLogistico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#OfertaTransportista"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Registra -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Registra">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#SeEncuentraEn -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#SeEncuentraEn">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#CentroLogistico"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Localización"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#SeEnviaA -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#SeEnviaA">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Localización"/>
     </owl:ObjectProperty>
     
 
@@ -92,6 +229,377 @@
     
 
 
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Tramita -->
+
+    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Tramita">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topObjectProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#CentroLogistico"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionTransportista"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Abonado -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Abonado">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Categoria -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Categoria">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Ciudad -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Ciudad">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Localización"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#CodigoPostal -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#CodigoPostal">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Localización"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Contraseña -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Contraseña">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Datos_Bancarios -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Datos_Bancarios">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Descripcion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Descripcion">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Destinatario -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Destinatario">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Dirección -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Dirección">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Localización"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Email -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Email">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Emisario -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Emisario">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#EstadoProducto -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#EstadoProducto">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#FechaEmision -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#FechaEmision">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#FechaEntrega -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#FechaEntrega">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#FechaRealizacion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#FechaRealizacion">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#IdEnvio -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#IdEnvio">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#IdLote -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#IdLote">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Lote"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Imagen -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Imagen">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#ImporteProd -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#ImporteProd">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#ImporteTotal -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#ImporteTotal">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#ImporteTrans -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#ImporteTrans">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#OfertaTransportista"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Marca -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Marca">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#MetodoDevolucion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#MetodoDevolucion">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Motivo -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Motivo">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Nombre -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Nombre">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Transportista"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#NombreCompañia -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#NombreCompañia">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#OfertaTransportista"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#NombreProducto -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#NombreProducto">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionBusqueda"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#NumeroPaquetes -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#NumeroPaquetes">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peso -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peso">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#float"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Prioridad -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Prioridad">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Puntuacion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Puntuacion">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Telefono -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Telefono">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Transportista"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Usuario -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Usuario">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comprador"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Vendedor"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Valoracion -->
+
+    <owl:DatatypeProperty rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Valoracion">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
@@ -100,14 +608,6 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
-    
-
-
-    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Accion -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Accion">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comunicación"/>
-    </owl:Class>
     
 
 
@@ -148,6 +648,14 @@
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Envio">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Datos"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Factura">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Datos"/>
     </owl:Class>
     
@@ -196,7 +704,15 @@
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Pedido -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Pedido">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Datos"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peticion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peticion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Comunicación"/>
     </owl:Class>
     
 
@@ -204,7 +720,7 @@
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionBusqueda -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionBusqueda">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Accion"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peticion"/>
     </owl:Class>
     
 
@@ -212,7 +728,15 @@
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionCompra -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionCompra">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Accion"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peticion"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionDevolucion">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peticion"/>
     </owl:Class>
     
 
@@ -220,7 +744,7 @@
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionTransportista -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#PeticionTransportista">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Accion"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Peticion"/>
     </owl:Class>
     
 
@@ -230,6 +754,12 @@
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Producto">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Datos"/>
     </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Recomendaciones -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Recomendaciones"/>
     
 
 
@@ -244,6 +774,14 @@
     <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaBusqueda -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaBusqueda">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Respuesta"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaDevolucion -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#RespuestaDevolucion">
         <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/carlo/ontologies/2018/5/untitled-ontology-26#Respuesta"/>
     </owl:Class>
     

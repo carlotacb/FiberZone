@@ -131,7 +131,7 @@ def newOrder(idProd):
     """
     print("Im in order func")
 
-    url ="http://" + hostname + ":" + "9011"+"/comm"
+    url ="http://" + hostname + ":" + "9012"+"/comm"
 
     #    flights_url = disIP.flights_IP + str(Constants.PORT_AFlights) + "/comm"
 

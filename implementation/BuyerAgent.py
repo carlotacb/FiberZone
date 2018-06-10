@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Dec 27 15:58:13 2013
 
 Esqueleto de agente usando los servicios web de Flask
 

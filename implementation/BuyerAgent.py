@@ -128,7 +128,7 @@ def comunicacion():
                 predicate=OntologyConstants.QUERY_MAX_PRICE
             )
 
-    return search_graph_products(query_dict).serialize(format='xml')
+    return search_graph_products(**query_dict).serialize(format='xml')
 
 
 def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_price=sys.float_info.max):

@@ -11,17 +11,17 @@ Tiene una funcion AgentBehavior1 que se lanza como un thread concurrente
 
 Asume que el agente de registro esta en el puerto 9000
 
-@author: javier
 """
 from __future__ import print_function
 from multiprocessing import Process, Queue
 import socket
 
-from rdflib import Namespace, Graph
+from rdflib import Namespace, Graph, RDF
+from rdflib.namespace import FOAF
 from flask import Flask, request
-
-import constants.FIPAACLPerformatives as FIPAACLPerformatives
-from AgentUtil.ACLMessages import build_message
+import sys
+import constants.FIPAACLPerformatives as performatives
+from AgentUtil.ACLMessages import build_message, get_message_properties
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
@@ -30,35 +30,24 @@ import requests
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-import os
-import bottlenose
-from bs4 import BeautifulSoup
-
 import random, constants.OntologyConstants as OntologyConstants
 from orderRequest import  OrderRequest
 from rdflib.term import Literal
-
-amazon = bottlenose.Amazon(
-    os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'], os.environ['AWS_ASSOCIATE_TAG'], Region='ES',
-    Parser=lambda text: BeautifulSoup(text, 'xml')
-)
-
-__author__ = 'javier'
 
 
 # Configuration stuff
 hostname = socket.gethostname()
 port = 9010
 
-agn = Namespace("http://www.agentes.org#")
+agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
 # Contador de mensajes
 mss_cnt = 0
 
 # Datos del Agente
 
-AgentePersonal = Agent('AgenteSimple',
-                       agn.AgenteSimple,
+BuyerAgent = Agent('BuyerAgent',
+                       agn.BuyerAgent,
                        'http://%s:%d/comm' % (hostname, port),
                        'http://%s:%d/Stop' % (hostname, port))
 
@@ -77,8 +66,10 @@ cola1 = Queue()
 # Flask stuff
 app = Flask(__name__)
 
-import logging
-logging.basicConfig(level=logging.INFO)
+
+@app.route("/")
+def welcome():
+    return "BuyerAgent"
 
 @app.route("/comm")
 def comunicacion():
@@ -87,7 +78,90 @@ def comunicacion():
     """
     global dsgraph
     global mss_cnt
-    pass
+
+    message = request.args['content']
+    graph_message = Graph()
+    graph_message.parse(data=message)
+    message_properties = get_message_properties(graph_message)
+
+    send_not_understood = lambda : build_message(
+            Graph(),
+            performatives.NOT_UNDERSTOOD,
+            sender=BuyerAgent.uri,
+            msgcnt=get_new_msg_count()
+        ).serialize(format='xml')
+
+    if message_properties is None:
+        return send_not_understood()
+
+    content = message_properties['content']
+    action = graph_message.value(
+        subject=content,
+        predicate=RDF.type
+    )
+
+    if action != OntologyConstants.SEARCH_PRODUCTS:
+        send_not_understood()
+
+    query_graph = graph_message.objects(content, OntologyConstants.QUERY)
+    query_dict = {}
+    for query in query_graph:
+        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_BRAND:
+            query_dict['brand'] = graph_message.value(
+                subject=query,
+                predicate=OntologyConstants.QUERY_BRAND
+            )
+        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_DESCRIPTION:
+            query_dict['description'] = graph_message.value(
+                subject=query,
+                predicate=OntologyConstants.QUERY_DESCRIPTION
+            )
+        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_MIN_PRICE:
+            query_dict['min_price'] = graph_message.value(
+                subject=query,
+                predicate=OntologyConstants.QUERY_MIN_PRICE
+            )
+        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_MAX_PRICE:
+            query_dict['max_price'] = graph_message.value(
+                subject=query,
+                predicate=OntologyConstants.QUERY_MAX_PRICE
+            )
+
+    return search_graph_products(query_dict).serialize(format='xml')
+
+
+def search_graph_products(brand=None, description=None, min_price=0.0, max_price=sys.float_info.max):
+    res = Graph()
+    res.parse('./rdf/database_products.rdf')
+
+    all_products = res.query(
+        '''
+        SELECT DISTINCT ?product ?id ?name ?description ?weight_grams ?category ?price_eurocents ?brand
+        WHERE {
+            ?product rdf:type ?type_prod .
+            ?product ns:product_id ?id .
+            ?product ns:product_name ?name .
+            ?product ns:product_description ?description .
+            ?product ns:weight_grams ?weight_grams .
+            ?product ns:category ?category .
+            ?product ns:price_eurocents ?price_eurocents .
+            ?product ns:brand ?brand .
+        }
+    ''', initNs=dict(
+            foaf=FOAF,
+            rdf=RDF,
+            ns=agn,
+    ))
+    print(all_products.serialize(format='json'))
+
+
+
+search_graph_products()
+
+def get_new_msg_count():
+    global mss_cnt
+    mss_cnt += 1
+    return mss_cnt
 
 
 @app.route("/Stop")
@@ -101,24 +175,6 @@ def stop():
     shutdown_server()
     return "Parando Servidor"
 
-
-
-@app.route("/search")
-def search():
-    """
-    Endpoint that returns search of query.
-    :return: amazon_items
-    """
-
-    query = request.args['query']
-
-    response = None
-    try:
-        response = amazon.ItemSearch(Keywords=query, SearchIndex="All")
-        print(response)
-    except Exception as e: print(e)
-
-    return response.prettify()
 
 #el grafo G tiene que contener toda la informacion
 #necesaria para realizar el pedido
@@ -138,7 +194,7 @@ def newOrder(idProd):
     messageDataGo = OrderRequest(random.randint(1, 2000), idProd)
     gra = messageDataGo.to_graph()
 
-    dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST), Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(
+    dataContent = build_message(gra, Literal(performatives.REQUEST), Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(
         format='xml')
     print("before send request ")
 #gr = send_message( build_message(gmess, perf=ACL.request, sender=InfoAgent.uri, receiver=DirectoryAgent.uri, content=reg_obj, msgcnt=mss_cnt),

@@ -15,6 +15,7 @@ Asume que el agente de registro esta en el puerto 9000
 from __future__ import print_function
 from multiprocessing import Process, Queue
 import socket
+from string import Template
 
 from rdflib import Namespace, Graph, RDF
 from rdflib.namespace import FOAF
@@ -111,10 +112,10 @@ def comunicacion():
                 subject=query,
                 predicate=OntologyConstants.QUERY_BRAND
             )
-        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_DESCRIPTION:
-            query_dict['description'] = graph_message.value(
+        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_SEARCH_TEXT:
+            query_dict['search_text'] = graph_message.value(
                 subject=query,
-                predicate=OntologyConstants.QUERY_DESCRIPTION
+                predicate=OntologyConstants.QUERY_SEARCH_TEXT
             )
         if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_MIN_PRICE:
             query_dict['min_price'] = graph_message.value(
@@ -130,12 +131,11 @@ def comunicacion():
     return search_graph_products(query_dict).serialize(format='xml')
 
 
-def search_graph_products(brand=None, description=None, min_price=0.0, max_price=sys.float_info.max):
-    res = Graph()
-    res.parse('./rdf/database_products.rdf')
+def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_price=sys.float_info.max):
+    all_products = Graph()
+    all_products.parse('./rdf/database_products.rdf')
 
-    all_products = res.query(
-        '''
+    sparql_query = Template('''
         SELECT DISTINCT ?product ?id ?name ?description ?weight_grams ?category ?price_eurocents ?brand
         WHERE {
             ?product rdf:type ?type_prod .
@@ -146,17 +146,29 @@ def search_graph_products(brand=None, description=None, min_price=0.0, max_price
             ?product ns:category ?category .
             ?product ns:price_eurocents ?price_eurocents .
             ?product ns:brand ?brand .
+            FILTER (
+                ?price_eurocents > $min_price && 
+                ?price_eurocents < $max_price &&
+                (regex(str(?name), '$search_text', 'i') || regex(str(?description), '$search_text', 'i') ) &&
+                regex(str(?brand), '$brand', 'i')
+            )
         }
-    ''', initNs=dict(
+    ''').substitute(dict(
+            min_price=min_price,
+            max_price=max_price,
+            brand=brand,
+            search_text=search_text
+        )
+    )
+
+    return all_products.query(
+        sparql_query,
+        initNs=dict(
             foaf=FOAF,
             rdf=RDF,
             ns=agn,
-    ))
-    print(all_products.serialize(format='json'))
-
-
-
-search_graph_products()
+        )
+    )
 
 def get_new_msg_count():
     global mss_cnt

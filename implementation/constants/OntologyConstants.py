@@ -1,10 +1,10 @@
 SEND_BUY_ORDER = "OrderRequest"
 SEND_PEDIDO = "PedidoRequest"
-SEARCH_PRODUCTS = 'search_products'
-QUERY = 'query'
-QUERY_BRAND = 'query_brand'
-QUERY_DESCRIPTION = 'query_description'
-QUERY_MIN_PRICE = 'query_min_price'
-QUERY_MAX_PRICE = 'query_max_price'
+SEARCH_PRODUCTS = 'action_search_products'
+QUERY = 'search_query'
+QUERY_BRAND = 'search_query_brand'
+QUERY_SEARCH_TEXT = 'search_query_search_text'
+QUERY_MIN_PRICE = 'search_query_min_price'
+QUERY_MAX_PRICE = 'search_query_max_price'
 ONTOLOGY_URI =  'http://ONTOLOGIA_ECSDI/'
 ONTOLOGY_PRODUCT_TYPE = 'http://ONTOLOGIA_ECSDI/product'

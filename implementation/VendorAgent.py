@@ -19,22 +19,10 @@ from rdflib.namespace import FOAF
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-import os
-import bottlenose
-from bs4 import BeautifulSoup
-
 import random, constants.OntologyConstants as OntologyConstants
 from orderRequest import  OrderRequest
 from pedidoRequest import  PedidoRequest
 from rdflib.term import Literal
-
-'''amazon = bottlenose.Amazon(
-    os.environ['AWS_ACCESS_KEY_ID'], os.environ['AWS_SECRET_ACCESS_KEY'], os.environ['AWS_ASSOCIATE_TAG'], Region='ES',
-    Parser=lambda text: BeautifulSoup(text, 'xml')
-)'''
-
-__author__ = 'javier'
-
 
 # Configuration stuff
 hostname = socket.gethostname()
@@ -47,8 +35,8 @@ mss_cnt = 0
 
 # Datos del Agente
 
-AgentePersonal = Agent('AgenteSimple',
-                       agn.AgenteSimple,
+VendorAgent = Agent('VendorAgent',
+                       agn.VendorAgent,
                        'http://%s:%d/comm' % (hostname, port),
                        'http://%s:%d/Stop' % (hostname, port))
 

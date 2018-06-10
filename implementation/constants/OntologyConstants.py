@@ -1,6 +1,5 @@
 SEND_BUY_ORDER = "OrderRequest"
 SEND_PEDIDO = "PedidoRequest"
-SEND_BUY_ORDER = 'OrderRequest'
 SEARCH_PRODUCTS = 'search_products'
 QUERY = 'query'
 QUERY_BRAND = 'query_brand'

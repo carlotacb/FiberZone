@@ -19,6 +19,7 @@ from string import Template
 
 from rdflib import Namespace, Graph, RDF
 from rdflib.namespace import FOAF
+import uuid
 from flask import Flask, request
 import sys
 import constants.FIPAACLPerformatives as performatives
@@ -31,7 +32,7 @@ import requests
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-import random, constants.OntologyConstants as OntologyConstants
+import constants.OntologyConstants as OntologyConstants
 from orderRequest import  OrderRequest
 from rdflib.term import Literal
 
@@ -203,7 +204,7 @@ def newOrder(idProd):
 
     #    flights_url = disIP.flights_IP + str(Constants.PORT_AFlights) + "/comm"
 
-    messageDataGo = OrderRequest(random.randint(1, 2000), idProd)
+    messageDataGo = OrderRequest(uuid.uuid4(), idProd)
     gra = messageDataGo.to_graph()
 
     dataContent = build_message(gra, Literal(performatives.REQUEST), Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(

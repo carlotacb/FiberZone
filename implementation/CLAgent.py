@@ -20,7 +20,8 @@ precioBase = 10
 precioFinal = 0
 app = Flask(__name__)
 mensajeFecha = "Recibirás el pedido en 2 dias a partir de:"
-
+precioExtra1 = 0
+precioExtra2 = 0
 
 @app.route('/comm', methods=['GET', 'POST'])
 def comunicacion():
@@ -32,6 +33,7 @@ def comunicacion():
     global precioBase
     global precioFinal
     global mensajeFecha
+    global precioExtra1,precioExtra2
     ahora = mensajeFecha
     ahora += " "
     ahora += time.strftime("%c")
@@ -41,20 +43,33 @@ def comunicacion():
    # print(order)
     #if order.peso > 10:
     peso = 11
-    if peso > 10:
-        precioBase += 2
+
+    #oferta transportista 1
+    url ="http://" + hostname + ":" + "9012"+"/calc"
+    dataContent = {"peso":peso}
+    resp = requests.post(url, data=dataContent)
+    precioExtra1 += int(resp.text)
+    print("precioExtra = ",precioExtra1)
+
+    #oferta transportista 2
+    url ="http://" + hostname + ":" + "9013"+"/calc"
+    dataContent2 = {"size":len(Lote)}
+    resp = requests.post(url, data=dataContent2)
+    precioExtra2 += int(resp.text)
+    print("precioExtra = ", precioExtra2)
 
     Lote.append(order.product_id)
     LoteFinal = Lote[:]
     if len(Lote) == 5 :
         #realizar envio
         #vaciar lote
-        precioFinal = precioBase
+        precioFinal = min(precioExtra2,precioExtra1)
         precioBase = 10
       #  LoteFinal[:] = Lote[:]
         Lote[:] = []
         LoteFinal.append(ahora)
         LoteFinal.append(precioFinal)
+        precioExtra1 = precioExtra2 = 0
         print(ahora)
         print(LoteFinal)
         return str(LoteFinal)

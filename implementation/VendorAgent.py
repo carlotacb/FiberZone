@@ -5,6 +5,7 @@ import socket
 
 from rdflib import Namespace, Graph
 from flask import Flask, request
+import uuid
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
 from AgentUtil.ACLMessages import build_message
@@ -12,6 +13,8 @@ from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
 import requests
+from rdflib import RDF
+from rdflib.namespace import FOAF
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -66,6 +69,8 @@ app = Flask(__name__)
 
 import logging
 logging.basicConfig(level=logging.INFO)
+
+ns = Namespace('ONTOLOGIA_ECSDI/')
 direccions = ["Barcelona", "Valencia", "Madrid", "Zaragoza", "Sevilla", "Tarragona", "Girona", "Lleida", "Castell de fels", "Na macaret"]
 
 @app.route('/comm', methods=['GET', 'POST'])
@@ -83,6 +88,16 @@ def comunicacion():
     print("creem messageDataGo Pedido")
     messageDataGo = PedidoRequest(order.uuid, order.product_id, "peso", random.randint(1, 9999),
                                   direccions[random.randint(0, 9)])
+
+    print("Llegim graph orders")
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_orders.rdf')
+    print("Afegim order")
+    add_order(all_orders, uuid.uuid4(), messageDataGo.product_id, messageDataGo.uuid,
+              messageDataGo.peso, messageDataGo.cp_code, messageDataGo.direction)
+    print("Sobreescrivim base de dades")
+    all_orders.serialize('./rdf/database_orders.rdf')
+
     print("creem messageDataGo graph")
     gra = messageDataGo.to_graph()
     #gra = order.to_graph()
@@ -93,10 +108,20 @@ def comunicacion():
                                 #Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(format='xml')
     dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST), Literal(OntologyConstants.SEND_PEDIDO)).serialize(format='xml')
 
+
     print("fem request")
     resp = requests.post(url, data=dataContent)
     return "asdf"
 
+def add_order(g, order_id, product_id, uuid, peso, cp_code, direction):
+    namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
+    order = namespace.__getattr__('#RequestOrder#' + str(order_id))
+    g.add((order, RDF.type, Literal('ONTOLOGIA_ECSDI/order')))
+    g.add((order, FOAF.uuid, Literal(uuid)))
+    g.add((order, FOAF.product_id, Literal(product_id)))
+    g.add((order, FOAF.cp_code, Literal(cp_code)))
+    g.add((order, FOAF.direction, Literal(direction)))
+    g.add((order, FOAF.weight_grams, Literal(peso)))
 
 if __name__ == '__main__':
     app.run(host=hostname, port=port, debug=True)

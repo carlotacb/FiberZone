@@ -85,7 +85,7 @@ def comunicacion():
     graph_message.parse(data=message)
     message_properties = get_message_properties(graph_message)
 
-    send_not_understood = lambda : build_message(
+    not_understood_message = lambda : build_message(
             Graph(),
             performatives.NOT_UNDERSTOOD,
             sender=BuyerAgent.uri,
@@ -93,7 +93,7 @@ def comunicacion():
         ).serialize(format='xml')
 
     if message_properties is None:
-        return send_not_understood()
+        return not_understood_message()
 
     content = message_properties['content']
     action = graph_message.value(
@@ -101,8 +101,8 @@ def comunicacion():
         predicate=RDF.type
     )
 
-    if action != OntologyConstants.SEARCH_PRODUCTS:
-        send_not_understood()
+    if action != OntologyConstants.ACTION_SEARCH_PRODUCTS:
+        not_understood_message()
 
     query_graph = graph_message.objects(content, OntologyConstants.QUERY)
     query_dict = {}

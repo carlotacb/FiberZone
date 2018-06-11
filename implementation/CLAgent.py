@@ -78,6 +78,7 @@ def update_state(uuid, state):
 
 
 #update_state('9c3522c4-b425-4a81-b594-9c69ff2f173e', 'pending')
+#update_state('7951dc00-ef96-4387-957d-cbc371af7230', 'updated')
 
 cola1 = Queue()
 
@@ -141,22 +142,19 @@ def comunicacion():
     all_products.parse('./rdf/database_products.rdf')
 
     weights = []
-    prices = []
+    prices_eurocents = []
     query = Template('''
         SELECT DISTINCT ?product ?weight_grams ?price_eurocents
         WHERE {
             ?product rdf:type ?type_prod .
-            ?product ns:product_id ?id .
+            ?product ns:product_id "$product_id" .
             ?product ns:weight_grams ?weight_grams .
             ?product ns:price_eurocents ?price_eurocents .
-            FILTER (
-                ?product_id = $product_id
-            )
         }
     ''')
 
     for product_id in product_ids:
-        all_products.query(
+        result_search = all_products.query(
             query.substitute(dict(product_id=product_id)),
             initNs=dict(
                 rdf=RDF,
@@ -164,6 +162,12 @@ def comunicacion():
             )
         )
 
+        for product, weight_grams, price_eurocents in result_search:
+            weights.append(int(weight_grams))
+            prices_eurocents.append(int(price_eurocents))
+
+
+    print('prices ', prices_eurocents, 'weights', weights)
 
     return 'lol'
     #new_order = all_orders.query(query)

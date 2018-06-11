@@ -19,6 +19,7 @@ import uuid
 from pedidoRequest import  PedidoRequest
 from AgentUtil.Agent import Agent
 from string import Template
+import random
 
 
 # Configuration stuff
@@ -53,10 +54,12 @@ def crear_lote(g, prices_eurocents, weights):
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
-    nslote = namespace.__getattr__('lote_' + str(uuid.uuid4()))
+    lote_uuid = uuid.uuid4()
+    nslote = namespace.__getattr__('lote_' + str(lote_uuid))
     g.add((nslote, RDF.type, Literal('ONTOLOGIA_ECSDI/')))
     g.add((nslote, namespace.prices_eurocents, Literal(prices_eurocents)))
     g.add((nslote, namespace.weights, Literal(weights)))
+    g.add((nslote, namespace.total_price, Literal(send_pedido(prices_eurocents, weights))))
 
     query = Template('''
             SELECT DISTINCT ?order ?order_id
@@ -80,7 +83,7 @@ def crear_lote(g, prices_eurocents, weights):
     print('orders ', orders_ids, 'length', len(orders_ids))
     if len(orders_ids) > 5:
         for order_id in orders_ids:
-            update_state(order_id, 'Looted')
+            update_state(order_id, 'Send')
             g.add((nslote, namespace.orders_ids, Literal(orders_ids)))
             g.serialize('./rdf/database_lotes.rdf')
             print('serialized')
@@ -88,11 +91,16 @@ def crear_lote(g, prices_eurocents, weights):
     return
 
 
-grafAux = Graph()
-grafAux.parse('./rdf/database_lotes.rdf')
-crear_lote(grafAux, 500, 1000)
-#grafAux.serialize('./rdf/database_lotes.rdf')
+def send_pedido(prices_eurocents, weights):
+    prices_eurocents = prices_eurocents + random.randint(0, 50)
+    return prices_eurocents
 
+
+
+#grafAux = Graph()
+#grafAux.parse('./rdf/database_lotes.rdf')
+#crear_lote(grafAux, 500, 1000)
+#grafAux.serialize('./rdf/database_lotes.rdf')
 
 
 #update_state('9c3522c4-b425-4a81-b594-9c69ff2f173e', 'pending')

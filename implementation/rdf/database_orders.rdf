@@ -3,202 +3,202 @@
    xmlns:ns1="http://ONTOLOGIA_ECSDI/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_7632494f-bac4-4afb-ae06-f46484db2363">
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_a9230022-7322-4345-b48f-b674b218bec3">
+    <ns1:direction>Girona</ns1:direction>
     <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7647</ns1:cp_code>
+    <ns1:order_id>a9230022-7322-4345-b48f-b674b218bec3</ns1:order_id>
+    <ns1:state>pending</ns1:state>
     <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:direction>Madrid</ns1:direction>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8875</ns1:cp_code>
-    <ns1:state>Looted</ns1:state>
     <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:order_id>7632494f-bac4-4afb-ae06-f46484db2363</ns1:order_id>
   </rdf:Description>
   <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_4cd50178-5af0-4812-9053-2f28f1237732">
     <ns1:order_id>4cd50178-5af0-4812-9053-2f28f1237732</ns1:order_id>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:state>pending</ns1:state>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">731</ns1:cp_code>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:direction>Lleida</ns1:direction>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_fed28f46-c90e-4b99-9198-f47e1548197e">
+    <ns1:direction>Madrid</ns1:direction>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:state>pending</ns1:state>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5028</ns1:cp_code>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:order_id>fed28f46-c90e-4b99-9198-f47e1548197e</ns1:order_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_7632494f-bac4-4afb-ae06-f46484db2363">
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8875</ns1:cp_code>
+    <ns1:order_id>7632494f-bac4-4afb-ae06-f46484db2363</ns1:order_id>
+    <ns1:state>pending</ns1:state>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:direction>Madrid</ns1:direction>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_e88c3cc1-d7bb-49d1-904e-fde5dba12994">
+    <ns1:order_id>e88c3cc1-d7bb-49d1-904e-fde5dba12994</ns1:order_id>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:state>Send</ns1:state>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5586</ns1:cp_code>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:direction>Tarragona</ns1:direction>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_905d3979-e905-46f1-bc0f-e56f6acb19eb">
+    <ns1:order_id>905d3979-e905-46f1-bc0f-e56f6acb19eb</ns1:order_id>
+    <ns1:direction>Barcelona</ns1:direction>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6641</ns1:cp_code>
+    <ns1:state>Send</ns1:state>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_e70894c9-a81f-4721-b1f2-14d1fbae83f4">
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:order_id>e70894c9-a81f-4721-b1f2-14d1fbae83f4</ns1:order_id>
+    <ns1:direction>Sevilla</ns1:direction>
+    <ns1:state>pending</ns1:state>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">218</ns1:cp_code>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_e43cb802-bd61-4d39-a09e-0d41c864655e">
     <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
     <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">731</ns1:cp_code>
-    <ns1:direction>Lleida</ns1:direction>
+    <ns1:state>pending</ns1:state>
     <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8151</ns1:cp_code>
+    <ns1:order_id>e43cb802-bd61-4d39-a09e-0d41c864655e</ns1:order_id>
+    <ns1:direction>Madrid</ns1:direction>
   </rdf:Description>
   <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_045b820c-1e58-4f56-9a13-32a652110390">
     <ns1:order_id>045b820c-1e58-4f56-9a13-32a652110390</ns1:order_id>
-    <ns1:state>Looted</ns1:state>
     <ns1:product_id>B0068A96N8</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
     <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3139</ns1:cp_code>
+    <ns1:state>pending</ns1:state>
     <ns1:direction>Sevilla</ns1:direction>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_4169edbb-c954-46f0-bb39-db271ba721bf">
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3139</ns1:cp_code>
     <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:order_id>4169edbb-c954-46f0-bb39-db271ba721bf</ns1:order_id>
-    <ns1:direction>Girona</ns1:direction>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">307</ns1:cp_code>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_9c3522c4-b425-4a81-b594-9c69ff2f173e">
-    <ns1:state>Looted</ns1:state>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:order_id>9c3522c4-b425-4a81-b594-9c69ff2f173e</ns1:order_id>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:direction>Zaragoza</ns1:direction>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4710</ns1:cp_code>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_9778291d-2f35-417c-b8d0-34d287c4fe05">
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6084</ns1:cp_code>
-    <ns1:order_id>9778291d-2f35-417c-b8d0-34d287c4fe05</ns1:order_id>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
-    <ns1:direction>Valencia</ns1:direction>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_905d3979-e905-46f1-bc0f-e56f6acb19eb">
-    <ns1:direction>Barcelona</ns1:direction>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6641</ns1:cp_code>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:order_id>905d3979-e905-46f1-bc0f-e56f6acb19eb</ns1:order_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:state>Looted</ns1:state>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_c64704c0-bce1-4011-9822-e67e149adfb3">
-    <ns1:direction>Madrid</ns1:direction>
-    <ns1:product_id>6</ns1:product_id>
-    <ns1:order_id>c64704c0-bce1-4011-9822-e67e149adfb3</ns1:order_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8893</ns1:cp_code>
-    <ns1:product_id>5</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_1846a18e-b242-4bd4-b184-2c5e1e68896e">
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:state>Looted</ns1:state>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2756</ns1:cp_code>
-    <ns1:order_id>1846a18e-b242-4bd4-b184-2c5e1e68896e</ns1:order_id>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:direction>Castelldefels</ns1:direction>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_e88c3cc1-d7bb-49d1-904e-fde5dba12994">
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5586</ns1:cp_code>
-    <ns1:order_id>e88c3cc1-d7bb-49d1-904e-fde5dba12994</ns1:order_id>
-    <ns1:direction>Tarragona</ns1:direction>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_93e964f9-4e6b-42b0-9040-cfefc70c5a01">
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3294</ns1:cp_code>
-    <ns1:direction>Barcelona</ns1:direction>
-    <ns1:order_id>93e964f9-4e6b-42b0-9040-cfefc70c5a01</ns1:order_id>
   </rdf:Description>
   <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_1a20f72c-2396-4edc-a83a-acca90a6d20f">
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:state>Send</ns1:state>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
     <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3819</ns1:cp_code>
-    <ns1:order_id>1a20f72c-2396-4edc-a83a-acca90a6d20f</ns1:order_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
     <ns1:direction>Barcelona</ns1:direction>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_ca0ba72b-6c41-4bdf-9a09-cb8c3ab2183f">
     <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5436</ns1:cp_code>
-    <ns1:direction>Lleida</ns1:direction>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:order_id>ca0ba72b-6c41-4bdf-9a09-cb8c3ab2183f</ns1:order_id>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_576dff23-cf35-4824-80ce-c3bc14b165e5">
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9665</ns1:cp_code>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:direction>Zaragoza</ns1:direction>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:order_id>576dff23-cf35-4824-80ce-c3bc14b165e5</ns1:order_id>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_11291362-fcd0-4521-8809-bdddcf83a9c0">
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:direction>Lleida</ns1:direction>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:state>Looted</ns1:state>
-    <ns1:order_id>11291362-fcd0-4521-8809-bdddcf83a9c0</ns1:order_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9567</ns1:cp_code>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_a9230022-7322-4345-b48f-b674b218bec3">
-    <ns1:direction>Girona</ns1:direction>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7647</ns1:cp_code>
-    <ns1:order_id>a9230022-7322-4345-b48f-b674b218bec3</ns1:order_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_e70894c9-a81f-4721-b1f2-14d1fbae83f4">
-    <ns1:direction>Sevilla</ns1:direction>
-    <ns1:order_id>e70894c9-a81f-4721-b1f2-14d1fbae83f4</ns1:order_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">218</ns1:cp_code>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_07cff2bc-2172-4b7a-8c23-78bf6fe83244">
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8026</ns1:cp_code>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:direction>Tarragona</ns1:direction>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
-    <ns1:order_id>07cff2bc-2172-4b7a-8c23-78bf6fe83244</ns1:order_id>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_fed28f46-c90e-4b99-9198-f47e1548197e">
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5028</ns1:cp_code>
-    <ns1:order_id>fed28f46-c90e-4b99-9198-f47e1548197e</ns1:order_id>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:direction>Madrid</ns1:direction>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_54a3f984-878a-4bd3-9ec9-3249e2b23a2a">
-    <ns1:direction>Sevilla</ns1:direction>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9754</ns1:cp_code>
-    <ns1:order_id>54a3f984-878a-4bd3-9ec9-3249e2b23a2a</ns1:order_id>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_e43cb802-bd61-4d39-a09e-0d41c864655e">
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8151</ns1:cp_code>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <ns1:direction>Madrid</ns1:direction>
-    <ns1:order_id>e43cb802-bd61-4d39-a09e-0d41c864655e</ns1:order_id>
-    <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
+    <ns1:order_id>1a20f72c-2396-4edc-a83a-acca90a6d20f</ns1:order_id>
   </rdf:Description>
   <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_23613dcf-e06e-45b0-9621-5b3213bb302c">
-    <ns1:product_id>B01M19HIN6</ns1:product_id>
-    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
     <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2558</ns1:cp_code>
     <ns1:direction>Sevilla</ns1:direction>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
     <ns1:order_id>23613dcf-e06e-45b0-9621-5b3213bb302c</ns1:order_id>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:state>pending</ns1:state>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_4169edbb-c954-46f0-bb39-db271ba721bf">
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">307</ns1:cp_code>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:direction>Girona</ns1:direction>
     <ns1:product_id>B0068A96N8</ns1:product_id>
-    <ns1:state>Looted</ns1:state>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:state>pending</ns1:state>
+    <ns1:order_id>4169edbb-c954-46f0-bb39-db271ba721bf</ns1:order_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_1846a18e-b242-4bd4-b184-2c5e1e68896e">
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2756</ns1:cp_code>
+    <ns1:order_id>1846a18e-b242-4bd4-b184-2c5e1e68896e</ns1:order_id>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:direction>Castelldefels</ns1:direction>
+    <ns1:state>pending</ns1:state>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_576dff23-cf35-4824-80ce-c3bc14b165e5">
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:state>pending</ns1:state>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9665</ns1:cp_code>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:direction>Zaragoza</ns1:direction>
+    <ns1:order_id>576dff23-cf35-4824-80ce-c3bc14b165e5</ns1:order_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_93e964f9-4e6b-42b0-9040-cfefc70c5a01">
+    <ns1:state>Send</ns1:state>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:order_id>93e964f9-4e6b-42b0-9040-cfefc70c5a01</ns1:order_id>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:direction>Barcelona</ns1:direction>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3294</ns1:cp_code>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_11291362-fcd0-4521-8809-bdddcf83a9c0">
+    <ns1:state>pending</ns1:state>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:order_id>11291362-fcd0-4521-8809-bdddcf83a9c0</ns1:order_id>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:direction>Lleida</ns1:direction>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9567</ns1:cp_code>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_9c3522c4-b425-4a81-b594-9c69ff2f173e">
+    <ns1:order_id>9c3522c4-b425-4a81-b594-9c69ff2f173e</ns1:order_id>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4710</ns1:cp_code>
+    <ns1:direction>Zaragoza</ns1:direction>
+    <ns1:state>pending</ns1:state>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_9778291d-2f35-417c-b8d0-34d287c4fe05">
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:order_id>9778291d-2f35-417c-b8d0-34d287c4fe05</ns1:order_id>
+    <ns1:direction>Valencia</ns1:direction>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6084</ns1:cp_code>
+    <ns1:state>Send</ns1:state>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_54a3f984-878a-4bd3-9ec9-3249e2b23a2a">
+    <ns1:order_id>54a3f984-878a-4bd3-9ec9-3249e2b23a2a</ns1:order_id>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:state>pending</ns1:state>
+    <ns1:direction>Sevilla</ns1:direction>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">9754</ns1:cp_code>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_07cff2bc-2172-4b7a-8c23-78bf6fe83244">
+    <ns1:direction>Tarragona</ns1:direction>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8026</ns1:cp_code>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:state>pending</ns1:state>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:order_id>07cff2bc-2172-4b7a-8c23-78bf6fe83244</ns1:order_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_c64704c0-bce1-4011-9822-e67e149adfb3">
+    <ns1:product_id>6</ns1:product_id>
+    <ns1:direction>Madrid</ns1:direction>
+    <ns1:state>Send</ns1:state>
+    <ns1:product_id>5</ns1:product_id>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8893</ns1:cp_code>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:order_id>c64704c0-bce1-4011-9822-e67e149adfb3</ns1:order_id>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_ca0ba72b-6c41-4bdf-9a09-cb8c3ab2183f">
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5436</ns1:cp_code>
+    <ns1:direction>Lleida</ns1:direction>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:state>pending</ns1:state>
+    <ns1:order_id>ca0ba72b-6c41-4bdf-9a09-cb8c3ab2183f</ns1:order_id>
   </rdf:Description>
 </rdf:RDF>

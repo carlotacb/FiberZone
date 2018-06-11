@@ -91,16 +91,16 @@ def comunicacion():
         predicate=RDF.type
     )
 
-    if action == OntologyConstants.ACTION_SEND_DEV:
+    if str(action) == OntologyConstants.ACTION_SEND_DEV:
         s = ""
         # aqui devolucion
         ran = random.randint(0, 9)
         if ran > 6:
             return "devolución denegada por la tienda"
         return "devolución aceptada"
-    if action == OntologyConstants.ACTION_CREATE_ORDER:
+    elif str(action) == OntologyConstants.ACTION_CREATE_ORDER:
         return create_order(graph_message)
-    if action == OntologyConstants.ACTION_ADD_EXT:
+    elif str(action) == OntologyConstants.ACTION_ADD_EXT:
         return create_product(graph_message)
     else:
         return not_understood_message()

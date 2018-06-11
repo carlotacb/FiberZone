@@ -4,9 +4,9 @@ from rdflib.namespace import Namespace, FOAF
 
 class PedidoRequest:
 
-    def __init__(self, uuid, product_id, peso, cp_code, direction):
+    def __init__(self, uuid, product_ids, peso, cp_code, direction):
         self.uuid = uuid
-        self.product_id = product_id
+        self.product_ids = product_ids
         self.peso = peso
         self.cp_code = cp_code
         self.direction = direction
@@ -17,10 +17,11 @@ class PedidoRequest:
         namespace = Namespace('ONTOLOGIA_ECSDI/')
         order = namespace.__getattr__('#RequestPedido#' + str(self.uuid))
         graph.add((order, FOAF.Uuid, Literal(self.uuid)))
-        graph.add((order, FOAF.product_id, Literal(self.product_id)))
         graph.add((order, FOAF.peso, Literal(self.peso)))
         graph.add((order, FOAF.cp_code, Literal(self.cp_code)))
         graph.add((order, FOAF.direction, Literal(self.direction)))
+        for product_id in self.product_ids:
+            graph.add((order, FOAF.product_id, Literal(product_id)))
 
         print("graf creat")
         return graph

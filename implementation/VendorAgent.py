@@ -75,14 +75,14 @@ def comunicacion():
 
     print("creem messageDataGo Pedido")
     #uuid = identificador del pedido,
-    messageDataGo = PedidoRequest(order.uuid, order.product_id, "peso", random.randint(1, 9999),
+    messageDataGo = PedidoRequest(order.uuid, [order.product_id, '345'], "peso", random.randint(1, 9999),
                                   direccions[random.randint(0, 9)])
 
     print("Llegim graph orders")
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
     print("Afegim order")
-    add_order(all_orders, messageDataGo.uuid, messageDataGo.product_id, messageDataGo.uuid,
+    add_order(all_orders, messageDataGo.uuid, messageDataGo.product_ids, messageDataGo.uuid,
               messageDataGo.peso, messageDataGo.cp_code, messageDataGo.direction)
     print("Sobreescrivim base de dades")
     all_orders.serialize('./rdf/database_orders.rdf')
@@ -101,15 +101,16 @@ def comunicacion():
     resp = requests.post(url, data=dataContent)
     return "asdf"
 
-def add_order(g, order_id, product_id, uuid, peso, cp_code, direction):
+def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction):
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
     order = namespace.__getattr__('#RequestOrder#' + str(order_id))
     g.add((order, RDF.type, Literal('ONTOLOGIA_ECSDI/order')))
-    g.add((order, FOAF.uuid, Literal(uuid)))
-    g.add((order, FOAF.product_id, Literal(product_id)))
-    g.add((order, FOAF.cp_code, Literal(cp_code)))
-    g.add((order, FOAF.direction, Literal(direction)))
-    g.add((order, FOAF.weight_grams, Literal(peso)))
+    g.add((order, namespace.uuid, Literal(uuid)))
+    g.add((order, namespace.cp_code, Literal(cp_code)))
+    g.add((order, namespace.direction, Literal(direction)))
+    g.add((order, namespace.weight_grams, Literal(peso)))
+    for product_id in product_ids:
+        g.add((order, namespace.product_id, Literal(product_id)))
 
 
 def agentbehavior1(cola):

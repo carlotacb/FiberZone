@@ -10,6 +10,7 @@ from AgentUtil import ACLMessages
 from orderRequest import OrderRequest
 import socket
 import time
+from pedidoRequest import  PedidoRequest
 
 
 # Configuration stuff
@@ -30,7 +31,6 @@ def comunicacion():
     Entrypoint de comunicacion
     """
     print("here CLAgent comunicacion")
-    graph = Graph().parse(data=request.data)
     global precioBase
     global precioFinal
     global mensajeFecha
@@ -38,22 +38,44 @@ def comunicacion():
     ahora = mensajeFecha
     ahora += " "
     ahora += time.strftime("%c")
+
+    graph = Graph().parse(data=request.data)
+    pedido = PedidoRequest.from_graph(graph)
+
+    #coger identificador y leer de la BD
+    identificador = pedido.uuid
+    print("Llegim graph orders")
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_orders.rdf')
+    query = """SELECT ?x ?uuid ?product_id ?peso ?cp_code ?direction
+       WHERE {
+            ?x ns1:Uuid ?uuid.
+            ?x ns1:product_id ?product_id.
+            ?x ns1:peso ?peso.
+            ?x ns1:cp_code ?cp_code.
+            ?x ns1:direction ?direction.
+            FILTER( str(?uuid) = '""" + identificador + """' )
+       }
+    """
+    newOrder = all_orders.query(query)
+    print(newOrder.serialize(format='xml'))
+
+
     print( 'Its a plan request')
     order = OrderRequest.from_graph(graph)
     print('Plan graph obtained, lets construct response message')
    # print(order)
     #if order.peso > 10:
     peso = 11
-
     #oferta transportista 1
-    url ="http://" + hostname + ":" + "9012"+"/calc"
+    url ="http://" + hostname + ":" + "9013"+"/calc"
     dataContent = {"peso":peso}
     resp = requests.post(url, data=dataContent)
     precioExtra1 += int(resp.text)
     print("precioExtra = ",precioExtra1)
 
     #oferta transportista 2
-    url ="http://" + hostname + ":" + "9013"+"/calc"
+    url ="http://" + hostname + ":" + "9014"+"/calc"
     dataContent2 = {"size":len(Lote)}
     resp = requests.post(url, data=dataContent2)
     precioExtra2 += int(resp.text)

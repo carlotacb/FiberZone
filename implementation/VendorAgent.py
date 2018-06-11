@@ -59,7 +59,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 ns = Namespace('ONTOLOGIA_ECSDI/')
-direccions = ["Barcelona", "Valencia", "Madrid", "Zaragoza", "Sevilla", "Tarragona", "Girona", "Lleida", "Castell de fels", "Na macaret"]
+direccions = ["Barcelona", "Valencia", "Madrid", "Zaragoza", "Sevilla", "Tarragona", "Girona", "Lleida", "Castelldefels", "Na macaret"]
 
 @app.route('/comm', methods=['GET', 'POST'])
 def comunicacion():
@@ -74,6 +74,7 @@ def comunicacion():
     url = "http://" + hostname + ":" + "9011" + "/comm"
 
     print("creem messageDataGo Pedido")
+    #uuid = identificador del pedido,
     messageDataGo = PedidoRequest(order.uuid, order.product_id, "peso", random.randint(1, 9999),
                                   direccions[random.randint(0, 9)])
 

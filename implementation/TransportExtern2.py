@@ -6,7 +6,7 @@ from flask import Flask, request, Response
 
 import socket
 hostname = socket.gethostname()
-port = 9013
+port = 9014
 app = Flask(__name__)
 
 
@@ -15,10 +15,7 @@ def calculaPreu():
     print("request form : ")
     print(request.form.get("size"))
     data = request.form.get("size")
-    extra = 0
-    print("data : ",data)
-    if int(data) == 4:
-        extra = 10
+    extra = data*2
     return str(extra)
 
 if __name__ == '__main__':

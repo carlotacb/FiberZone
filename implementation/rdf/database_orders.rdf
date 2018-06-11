@@ -25,6 +25,7 @@
     <rdf:type>ONTOLOGIA_ECSDI/order</rdf:type>
     <ns1:uuid>7951dc00-ef96-4387-957d-cbc371af7230</ns1:uuid>
     <ns1:weight_grams>peso</ns1:weight_grams>
+    <ns1:state>pending</ns1:state>
     <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7123</ns1:cp_code>
   </rdf:Description>
   <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/#RequestOrder#4">

@@ -2,7 +2,9 @@
 from imaplib import Literal
 import requests
 from flask import Flask, request, Response
-from rdflib import Graph
+from rdflib import Namespace, Graph, RDF
+from rdflib.namespace import FOAF
+from rdflib.term import Literal
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
 import constants.OntologyConstants as OntologyConstants
@@ -24,6 +26,33 @@ app = Flask(__name__)
 mensajeFecha = "Recibirás el pedido en 2 dias a partir de:"
 precioExtra1 = 0
 precioExtra2 = 0
+
+FOAF = Namespace('http://xmlns.com/foaf/0.1/')
+agn = Namespace(OntologyConstants.ONTOLOGY_URI)
+
+
+def update_state(uuid, state):
+    print('id:', uuid, 'state:', state)
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_orders.rdf')
+    query_update = """DELETE { ?order ns1:state 'pending' }
+    INSERT { ?order ns1:state '""" + state + """' }
+    WHERE
+    {
+        ?order ns1:uuid '""" + uuid + """'
+    }"""
+    print(query_update)
+    newOrder = all_orders.query(query_update,  initNs=dict(
+            foaf=FOAF,
+            rdf=RDF,
+            ns1=agn,
+        ))
+    print(newOrder.serialize(format='xml'))
+    return
+
+
+update_state('7951dc00-ef96-4387-957d-cbc371af7230', 'updated')
+
 
 @app.route('/comm', methods=['GET', 'POST'])
 def comunicacion():

@@ -105,29 +105,21 @@ def comunicacion():
     if action != OntologyConstants.ACTION_SEARCH_PRODUCTS:
         return not_understood_message()
 
-    query_graph = graph_message.objects(content, OntologyConstants.QUERY)
     query_dict = {}
-    for query in query_graph:
-        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_BRAND:
-            query_dict['brand'] = graph_message.value(
-                subject=query,
-                predicate=OntologyConstants.QUERY_BRAND
-            )
-        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_SEARCH_TEXT:
-            query_dict['search_text'] = graph_message.value(
-                subject=query,
-                predicate=OntologyConstants.QUERY_SEARCH_TEXT
-            )
-        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_MIN_PRICE:
-            query_dict['min_price'] = graph_message.value(
-                subject=query,
-                predicate=OntologyConstants.QUERY_MIN_PRICE
-            )
-        if graph_message.value(subject=query, predicate=RDF.type) == OntologyConstants.QUERY_MAX_PRICE:
-            query_dict['max_price'] = graph_message.value(
-                subject=query,
-                predicate=OntologyConstants.QUERY_MAX_PRICE
-            )
+    if graph_message.value(subject=content, predicate=OntologyConstants.QUERY_BRAND):
+        print('mega gay is ', graph_message.value(subject=content, predicate=OntologyConstants.QUERY_BRAND))
+
+    if graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_BRAND]):
+        query_dict['brand'] = graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_BRAND])
+
+    if graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_SEARCH_TEXT]):
+        query_dict['search_text'] = graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_SEARCH_TEXT])
+
+    if graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_MIN_PRICE]):
+        query_dict['min_price'] = graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_MIN_PRICE])
+
+    if graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_MAX_PRICE]):
+        query_dict['max_price'] = graph_message.value(subject=content, predicate=agn[OntologyConstants.QUERY_MAX_PRICE])
 
     return search_graph_products(**query_dict).serialize(format='xml')
 
@@ -137,7 +129,7 @@ def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_pri
     all_products.parse('./rdf/database_products.rdf')
 
     sparql_query = Template('''
-        SELECT DISTINCT ?product ?id ?name ?description ?weight_grams ?category ?price_eurocents ?brand
+        SELECT DISTINCT ?product ?id ?name ?description ?image ?weight_grams ?category ?price_eurocents ?brand
         WHERE {
             ?product rdf:type ?type_prod .
             ?product ns:product_id ?id .
@@ -146,6 +138,7 @@ def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_pri
             ?product ns:weight_grams ?weight_grams .
             ?product ns:category ?category .
             ?product ns:price_eurocents ?price_eurocents .
+            ?product ns:image ?image .
             ?product ns:brand ?brand .
             FILTER (
                 ?price_eurocents > $min_price && 
@@ -162,7 +155,7 @@ def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_pri
     )
     )
 
-    return all_products.query(
+    result_query = all_products.query(
         sparql_query,
         initNs=dict(
             foaf=FOAF,
@@ -170,6 +163,20 @@ def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_pri
             ns=agn,
         )
     )
+
+    result_graph = Graph()
+    for x in result_query:
+        subject = x.product
+        result_graph.add((subject, RDF.type, agn.product))
+        result_graph.add((subject, agn.product_id, x.id))
+        result_graph.add((subject, agn.product_name, x.name))
+        result_graph.add((subject, agn.product_description, x.description))
+        result_graph.add((subject, agn.category, x.category))
+        result_graph.add((subject, agn.price_eurocents, x.price_eurocents))
+        result_graph.add((subject, agn.brand, x.brand))
+        result_graph.add((subject, agn.image, x.image))
+
+    return result_graph
 
 
 def get_new_msg_count():
@@ -199,11 +206,6 @@ def newOrder(idProds):
     Creates a new order with the idProd
     :return:
     """
-
-    #    flights_url = disIP.flights_IP + str(Constants.PORT_AFlights) + "/comm"
-
-    #messageDataGo = OrderRequest(uuid.uuid4(), product_ids)
-    #gra = messageDataGo.to_graph()
 
     product_ids = idProds.split(',')
     order_id = uuid.uuid4()
@@ -261,7 +263,7 @@ if __name__ == '__main__':
     ab1.start()
 
     # Ponemos en marcha el servidor
-    app.run(host=hostname, port=port)
+    app.run(host=hostname, port=port, debug=True)
 
     # Esperamos a que acaben los behaviors
     ab1.join()

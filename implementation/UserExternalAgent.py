@@ -38,7 +38,7 @@ from rdflib.term import Literal
 
 # Configuration stuff
 hostname = socket.gethostname()
-port = 9015
+port = 9016
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
@@ -47,8 +47,8 @@ mss_cnt = 0
 
 # Datos del Agente
 
-ExternalSellerAgent = Agent('SellerExternalAgent',
-                       agn.SellerExternalAgent,
+ExternalUserAgent = Agent('ExternalUserAgent',
+                       agn.ExternalUserAgent,
                        'http://%s:%d/comm' % (hostname, port),
                        'http://%s:%d/Stop' % (hostname, port))
 
@@ -68,52 +68,61 @@ cola1 = Queue()
 app = Flask(__name__, template_folder='./templates')
 
 
-def add_product_to_graph(g, product_id, product_name, product_description, weight_grams, brand, price, category, seller):
-    g.add((agn[product_id], agn.product_name, Literal(product_name)))
-    g.add((agn[product_id], agn.product_id, Literal(product_id)))
-    g.add((agn[product_id], agn.product_description, Literal(product_description)))
-    g.add((agn[product_id], agn.weight_grams, Literal(weight_grams)))
-    g.add((agn[product_id], agn.brand, Literal(brand)))
-    g.add((agn[product_id], agn.price_eurocents, Literal(price)))
-    g.add((agn[product_id], agn.category, Literal(category)))
-    g.add((agn[product_id], agn.seller, Literal(seller)))
-
 @app.route("/", methods=['GET', 'POST'])
 def welcome():
     if request.method == 'GET':
-        return render_template('external_seller.html')
+        return render_template('search.html')
 
     message = Graph()
+    msg_count = get_new_msg_count()
+    search = agn['search_query_' + str(msg_count)]
 
-    product_id = uuid.uuid4()
-    add_product_to_graph(
-        message,
-        product_id,
-        request.form['product_name'],
-        request.form['product_description'],
-        int(request.form['weight_grams']),
-        request.form['brand'],
-        int(int(request.form['price_euros']) / 100),
-        request.form['category'],
-        request.form['seller']
-    )
+    if request.form['brand']:
+        message.add((search, agn[OntologyConstants.QUERY_BRAND], Literal(request.form['brand'])))
 
-    message.add((agn[product_id], RDF.type, Literal(OntologyConstants.ACTION_ADD_EXT)))
+    if request.form['min_price']:
+        message.add((search, agn[OntologyConstants.QUERY_MIN_PRICE], Literal(int(request.form['min_price']) * 100)))
 
-    vendor_agent = ExternalSellerAgent.find_agent(DirectoryAgent, agn.VendorAgent)
+    if request.form['max_price']:
+        message.add((search, agn[OntologyConstants.QUERY_MAX_PRICE], Literal(int(request.form['max_price']) * 100)))
+
+    if request.form['search_text']:
+        message.add((search, agn[OntologyConstants.QUERY_SEARCH_TEXT], Literal(request.form['search_text'])))
+
+    message.add((search, RDF.type, Literal(OntologyConstants.ACTION_SEARCH_PRODUCTS)))
+
+    print('lol fuck')
+    BuyerAgent = ExternalUserAgent.find_agent(DirectoryAgent, agn.BuyerAgent)
+    print('you have agent or what')
 
     msg = build_message(
         message,
         perf=Literal(performatives.REQUEST),
-        sender=ExternalSellerAgent.uri,
-        receiver=vendor_agent.uri,
-        msgcnt=get_new_msg_count(),
-        content=agn[product_id]
+        sender=ExternalUserAgent.uri,
+        receiver=BuyerAgent.uri,
+        msgcnt=msg_count,
+        content=search
     )
 
-    send_message(msg, vendor_agent.address)
+    print("hey lets print")
+    response = send_message(msg, BuyerAgent.address)
 
-    return render_template('external_seller.html')
+    products = []
+    for item in response.subjects(RDF.type, agn.product):
+        product = dict(
+            product_name=str(response.value(subject=item, predicate=agn.product_name)),
+            product_id=str(response.value(subject=item, predicate=agn.product_id)),
+            brand=str(response.value(subject=item, predicate=agn.brand)),
+            product_description=str(response.value(subject=item, predicate=agn.product_description)),
+            price_euros=int(response.value(subject=item, predicate=agn.price_eurocents))/100,
+            category=str(response.value(subject=item, predicate=agn.category)),
+            image=str(response.value(subject=item, predicate=agn.image)),
+        )
+        products.append(product)
+
+    print('products', products)
+
+    return render_template('search_result.html', products=products)
 
 def get_new_msg_count():
     global mss_cnt
@@ -155,7 +164,7 @@ def agentbehavior1(cola):
     :return:
     """
 
-    ExternalSellerAgent.register_agent(DirectoryAgent)
+    ExternalUserAgent.register_agent(DirectoryAgent)
 
     pass
 

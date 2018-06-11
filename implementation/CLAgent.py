@@ -113,54 +113,7 @@ DirectoryAgent = Agent('DirectoryAgent',
                        'http://%s:9000/Stop' % hostname)
 
 
-@app.route('/comm', methods=['GET', 'POST'])
-def comunicacion():
-    """
-    Entrypoint de comunicacion
-    """
-
-    message = request.args['content']
-    graph_message = Graph()
-    graph_message.parse(data=message)
-    message_properties = get_message_properties(graph_message)
-
-    not_understood_message = lambda: build_message(
-        Graph(),
-        performatives.NOT_UNDERSTOOD,
-        sender=CLAgent.uri,
-        msgcnt=get_new_msg_count()
-    ).serialize(format='xml')
-
-    if message_properties is None:
-        return not_understood_message()
-
-    content = message_properties['content']
-    action = graph_message.value(
-        subject=content,
-        predicate=RDF.type
-    )
-
-    global precioBase
-    global precioFinal
-    global mensajeFecha
-    global precioExtra1,precioExtra2
-    ahora = mensajeFecha
-    ahora += " "
-    ahora += time.strftime("%c")
-
-    graph = Graph().parse(data=request.data)
-
-    product_ids = []
-
-    for s, p, o in graph:
-        if (p == agn.product_id):
-            product_ids.append(str(o))
-
-    all_products = Graph()
-    all_products.parse('./rdf/database_products.rdf')
-
-    weights = []
-    prices_eurocents = []
+def get_prices_weights_from_product_ids(product_ids):
     query = Template('''
         SELECT DISTINCT ?product ?weight_grams ?price_eurocents
         WHERE {
@@ -171,6 +124,10 @@ def comunicacion():
         }
     ''')
 
+    out = []
+
+    all_products = Graph()
+    all_products.parse('./rdf/database_products.rdf')
     for product_id in product_ids:
         result_search = all_products.query(
             query.substitute(dict(product_id=product_id)),
@@ -181,12 +138,51 @@ def comunicacion():
         )
 
         for product, weight_grams, price_eurocents in result_search:
-            weights.append(int(weight_grams))
-            prices_eurocents.append(int(price_eurocents))
+            item = dict(
+                weight_grams=int(weight_grams),
+                price_eurocents=int(price_eurocents),
+                product_id=product_id
+            )
+            out.append(item)
+    return out
 
 
-    print('prices ', prices_eurocents, 'weights', weights)
-    crear_lote(prices_eurocents, weights)
+def get_prices_weights_from_orders_graph(graph):
+
+    product_ids = []
+
+    for s, p, o in graph:
+        if (p == agn.product_id):
+            product_ids.append(str(o))
+
+    print('product ids', product_ids)
+
+    return get_prices_weights_from_product_ids(product_ids)
+
+
+@app.route('/comm', methods=['GET', 'POST'])
+def comunicacion():
+    """
+    Entrypoint de comunicacion
+    """
+    global precioBase
+    global precioFinal
+    global mensajeFecha
+    global precioExtra1,precioExtra2
+    ahora = mensajeFecha
+    ahora += " "
+    ahora += time.strftime("%c")
+
+    graph = Graph().parse(data=request.data)
+
+    res = get_prices_weights_from_orders_graph(graph)
+
+    print('res is ', res)
+
+    product_prices = [x['price_eurocents'] for x in res]
+    product_weights = [x['weight_grams'] for x in res]
+
+    crear_lote(product_prices, product_weights)
 
     return 'lol'
     #new_order = all_orders.query(query)

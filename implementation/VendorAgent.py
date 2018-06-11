@@ -82,7 +82,7 @@ def comunicacion():
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
     print("Afegim order")
-    add_order(all_orders, uuid.uuid4(), messageDataGo.product_id, messageDataGo.uuid,
+    add_order(all_orders, messageDataGo.uuid, messageDataGo.product_id, messageDataGo.uuid,
               messageDataGo.peso, messageDataGo.cp_code, messageDataGo.direction)
     print("Sobreescrivim base de dades")
     all_orders.serialize('./rdf/database_orders.rdf')
@@ -93,9 +93,8 @@ def comunicacion():
     print("creem la request")
     print(gra.serialize(format='xml'))
 
-    #dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST),
-                                #Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(format='xml')
-    dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST), Literal(OntologyConstants.SEND_PEDIDO)).serialize(format='xml')
+    dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST),
+                                Literal(OntologyConstants.SEND_PEDIDO)).serialize(format='xml')
 
 
     print("fem request")

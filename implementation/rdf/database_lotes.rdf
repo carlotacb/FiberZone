@@ -3,26 +3,9 @@
    xmlns:ns1="http://ONTOLOGIA_ECSDI/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_dfa23320-3a49-42f8-93c4-afb466a422f7">
-    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
-    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
-    <ns1:orders_ids>['9c3522c4-b425-4a81-b594-9c69ff2f173e', 'c64704c0-bce1-4011-9822-e67e149adfb3']</ns1:orders_ids>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_1d934b7d-fb1e-4e2d-8fe6-9138641d4762">
     <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_58a23467-37ab-4374-8a70-e43cd6eb9ba3">
-    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
-    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
-    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
-    <ns1:orders_ids>['9c3522c4-b425-4a81-b594-9c69ff2f173e', 'c64704c0-bce1-4011-9822-e67e149adfb3']</ns1:orders_ids>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_6b19679b-c70e-42af-b031-e1b24b93c20f">
-    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
-    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
-    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_2b056fe1-d4ee-4508-8e7f-6ecea483f259">
-    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
-    <ns1:orders_ids>['c64704c0-bce1-4011-9822-e67e149adfb3', '9c3522c4-b425-4a81-b594-9c69ff2f173e']</ns1:orders_ids>
+    <ns1:orders_ids>['576dff23-cf35-4824-80ce-c3bc14b165e5', '1846a18e-b242-4bd4-b184-2c5e1e68896e', '93e964f9-4e6b-42b0-9040-cfefc70c5a01', '4cd50178-5af0-4812-9053-2f28f1237732', 'ca0ba72b-6c41-4bdf-9a09-cb8c3ab2183f', '1a20f72c-2396-4edc-a83a-acca90a6d20f']</ns1:orders_ids>
     <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
     <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
   </rdf:Description>

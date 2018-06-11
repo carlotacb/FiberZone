@@ -6,6 +6,8 @@ from rdflib.namespace import FOAF
 from rdflib import Graph, Namespace, RDF
 from multiprocessing import Process, Queue
 from rdflib.term import Literal
+from AgentUtil.ACLMessages import build_message, get_message_properties
+import constants.FIPAACLPerformatives as performatives
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
 import constants.OntologyConstants as OntologyConstants
@@ -13,6 +15,7 @@ from AgentUtil import ACLMessages
 from orderRequest import OrderRequest
 import socket
 import time
+import uuid
 from pedidoRequest import  PedidoRequest
 from AgentUtil.Agent import Agent
 from string import Template
@@ -34,6 +37,23 @@ FOAF = Namespace('http://xmlns.com/foaf/0.1/')
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
 
+def crear_lote():
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_orders.rdf')
+    orders_lotes = all_orders.triples((None, agn.state, Literal('pending')))
+    lote = Graph()
+    namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
+    nslote = namespace.__getattr__('lote_' + uuid.uuid4())
+    for x in orders_lotes:
+        print('marika', x)
+        lote.add((nslote, RDF.type, Literal('ONTOLOGIA_ECSDI/')))
+
+    return
+
+
+crear_lote()
+
+
 def update_state(uuid, state):
     print('id:', uuid, 'state:', state)
     all_orders = Graph()
@@ -45,7 +65,7 @@ def update_state(uuid, state):
     }"""
     print(query_update)'''
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
-    order = namespace.__getattr__('#RequestOrder#' + uuid)
+    order = namespace.__getattr__('order_' + uuid)
     all_orders.set((order, namespace.state, Literal(state)))
     all_orders.serialize('./rdf/database_orders.rdf')
     '''newOrder = all_orders.update(query_update,  initNs=dict(
@@ -57,7 +77,7 @@ def update_state(uuid, state):
     return
 
 
-update_state('52c823c3-0622-4fd5-aacd-95769ed75991', 'updated')
+#update_state('9c3522c4-b425-4a81-b594-9c69ff2f173e', 'pending')
 
 cola1 = Queue()
 
@@ -79,7 +99,28 @@ def comunicacion():
     """
     Entrypoint de comunicacion
     """
-    print("here CLAgent comunicacion")
+
+    message = request.args['content']
+    graph_message = Graph()
+    graph_message.parse(data=message)
+    message_properties = get_message_properties(graph_message)
+
+    not_understood_message = lambda: build_message(
+        Graph(),
+        performatives.NOT_UNDERSTOOD,
+        sender=CLAgent.uri,
+        msgcnt=get_new_msg_count()
+    ).serialize(format='xml')
+
+    if message_properties is None:
+        return not_understood_message()
+
+    content = message_properties['content']
+    action = graph_message.value(
+        subject=content,
+        predicate=RDF.type
+    )
+
     global precioBase
     global precioFinal
     global mensajeFecha
@@ -167,6 +208,12 @@ def comunicacion():
 
     return len(Lote).__str__()
     return order.product_id
+
+
+def get_new_msg_count():
+    global mss_cnt
+    mss_cnt += 1
+    return mss_cnt
 
 
 def agentbehavior1(cola):

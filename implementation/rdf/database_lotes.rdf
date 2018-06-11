@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ns1="http://ONTOLOGIA_ECSDI/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_dfa23320-3a49-42f8-93c4-afb466a422f7">
+    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
+    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
+    <ns1:orders_ids>['9c3522c4-b425-4a81-b594-9c69ff2f173e', 'c64704c0-bce1-4011-9822-e67e149adfb3']</ns1:orders_ids>
+    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_58a23467-37ab-4374-8a70-e43cd6eb9ba3">
+    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
+    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
+    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
+    <ns1:orders_ids>['9c3522c4-b425-4a81-b594-9c69ff2f173e', 'c64704c0-bce1-4011-9822-e67e149adfb3']</ns1:orders_ids>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_6b19679b-c70e-42af-b031-e1b24b93c20f">
+    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
+    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
+    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/lote_2b056fe1-d4ee-4508-8e7f-6ecea483f259">
+    <ns1:prices_eurocents rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">500</ns1:prices_eurocents>
+    <ns1:orders_ids>['c64704c0-bce1-4011-9822-e67e149adfb3', '9c3522c4-b425-4a81-b594-9c69ff2f173e']</ns1:orders_ids>
+    <ns1:weights rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1000</ns1:weights>
+    <rdf:type>ONTOLOGIA_ECSDI/</rdf:type>
+  </rdf:Description>
+</rdf:RDF>

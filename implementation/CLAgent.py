@@ -37,42 +37,56 @@ FOAF = Namespace('http://xmlns.com/foaf/0.1/')
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
 
-def crear_lote():
+def crear_lote(g, prices_eurocents, weights):
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
     orders_lotes = all_orders.triples((None, agn.state, Literal('pending')))
-    lote = Graph()
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
-    nslote = namespace.__getattr__('lote_' + uuid.uuid4())
-    for x in orders_lotes:
-        print('marika', x)
-        lote.add((nslote, RDF.type, Literal('ONTOLOGIA_ECSDI/')))
+    nslote = namespace.__getattr__('lote_' + str(uuid.uuid4()))
+    g.add((nslote, RDF.type, Literal('ONTOLOGIA_ECSDI/')))
+    g.add((nslote, namespace.prices_eurocents, Literal(prices_eurocents)))
+    g.add((nslote, namespace.weights, Literal(weights)))
+
+    query = Template('''
+            SELECT DISTINCT ?order ?order_id
+            WHERE {
+                ?order ns:order_id ?order_id .
+                ?order ns:state "$state" .
+            }
+        ''')
+    result_search = all_orders.query(
+        query.substitute(dict(state='pending')),
+        initNs=dict(
+            rdf=RDF,
+            ns=agn,
+        )
+    )
+    orders_ids = []
+    for order, order_id in result_search:
+        print(order_id)
+        orders_ids.append(str(order_id))
+
+    print('orders ', orders_ids)
+    g.add((nslote, namespace.orders_ids, Literal(orders_ids)))
 
     return
 
 
-crear_lote()
+grafAux = Graph()
+grafAux.parse('./rdf/database_lotes.rdf')
+crear_lote(grafAux, 500, 1000)
+grafAux.serialize('./rdf/database_lotes.rdf')
+print('serialized')
 
 
 def update_state(uuid, state):
     print('id:', uuid, 'state:', state)
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
-    '''query_update = """DELETE { ?order ns1:state 'pending' }
-    WHERE
-    {
-        ?order ns1:uuid '""" + uuid + """'
-    }"""
-    print(query_update)'''
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
     order = namespace.__getattr__('order_' + uuid)
     all_orders.set((order, namespace.state, Literal(state)))
     all_orders.serialize('./rdf/database_orders.rdf')
-    '''newOrder = all_orders.update(query_update,  initNs=dict(
-            foaf=FOAF,
-            rdf=RDF,
-            ns1=agn,
-        ))'''
     print(all_orders.serialize(format='xml'))
     return
 
@@ -168,6 +182,7 @@ def comunicacion():
 
 
     print('prices ', prices_eurocents, 'weights', weights)
+    crear_lote(prices_eurocents, weights)
 
     return 'lol'
     #new_order = all_orders.query(query)

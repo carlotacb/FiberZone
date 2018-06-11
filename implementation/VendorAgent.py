@@ -162,6 +162,7 @@ def create_order(graph_message):
             all_orders.add((s, p, o))
     all_orders.add((subject, agn.cp_code, Literal(random.randint(1, 9999))))
     all_orders.add((subject, agn.direction, Literal(direccions[random.randint(0, 9)])))
+    all_orders.add((subject, agn.state, Literal('pending')))
     all_orders.serialize('./rdf/database_orders.rdf')
 
     CLAgent = VendorAgent.find_agent(DirectoryAgent, agn.CLAgent)

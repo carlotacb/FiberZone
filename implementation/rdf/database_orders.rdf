@@ -1,39 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rdf:RDF
-   xmlns:ns1="http://xmlns.com/foaf/0.1/"
+   xmlns:ns1="http://ONTOLOGIA_ECSDI/"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/#RequestOrder#3">
-    <ns1:uuid>da232096-124e-4483-9f51-4cdd6b826a7a</ns1:uuid>
-    <rdf:type>ONTOLOGIA_ECSDI/order</rdf:type>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5064</ns1:cp_code>
-    <ns1:direction>Lleida</ns1:direction>
-    <ns1:product_id>3</ns1:product_id>
-    <ns1:weight_grams>peso</ns1:weight_grams>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/#RequestOrder#5">
-    <ns1:weight_grams>peso</ns1:weight_grams>
-    <ns1:uuid>8fa5a7e3-e710-4c50-92af-1abb841b3de1</ns1:uuid>
-    <rdf:type>ONTOLOGIA_ECSDI/order</rdf:type>
-    <ns1:direction>Castell de fels</ns1:direction>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7293</ns1:cp_code>
-    <ns1:product_id>10</ns1:product_id>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/#RequestOrder#52c823c3-0622-4fd5-aacd-95769ed75991">
-    <ns1:product_id>20</ns1:product_id>
-    <ns1:direction>Madrid</ns1:direction>
-    <rdf:type>ONTOLOGIA_ECSDI/order</rdf:type>
-    <ns1:uuid>7951dc00-ef96-4387-957d-cbc371af7230</ns1:uuid>
-    <ns1:weight_grams>peso</ns1:weight_grams>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_9c3522c4-b425-4a81-b594-9c69ff2f173e">
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4710</ns1:cp_code>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:product_id>B01M19HIN6</ns1:product_id>
+    <ns1:direction>Zaragoza</ns1:direction>
     <ns1:state>pending</ns1:state>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">7123</ns1:cp_code>
+    <ns1:product_id>B0068A96N8</ns1:product_id>
+    <ns1:order_id>9c3522c4-b425-4a81-b594-9c69ff2f173e</ns1:order_id>
   </rdf:Description>
-  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/#RequestOrder#4">
-    <ns1:uuid>23baaaa4-d680-4477-ad14-c6c1b2620144</ns1:uuid>
+  <rdf:Description rdf:about="http://ONTOLOGIA_ECSDI/order_c64704c0-bce1-4011-9822-e67e149adfb3">
+    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8893</ns1:cp_code>
+    <ns1:order_id>c64704c0-bce1-4011-9822-e67e149adfb3</ns1:order_id>
     <ns1:product_id>6</ns1:product_id>
-    <rdf:type>ONTOLOGIA_ECSDI/order</rdf:type>
-    <ns1:cp_code rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2879</ns1:cp_code>
-    <ns1:direction>Valencia</ns1:direction>
-    <ns1:weight_grams>peso</ns1:weight_grams>
+    <ns1:product_id>5</ns1:product_id>
+    <ns1:direction>Madrid</ns1:direction>
+    <rdf:type rdf:resource="http://ONTOLOGIA_ECSDI/order"/>
+    <ns1:state>pending</ns1:state>
   </rdf:Description>
 </rdf:RDF>

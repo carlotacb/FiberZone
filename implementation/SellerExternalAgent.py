@@ -86,9 +86,10 @@ def welcome():
 
     new_product = Graph()
 
+    product_id = uuid.uuid4()
     add_product_to_graph(
         new_product,
-        uuid.uuid4(),
+        product_id,
         request.form['product_name'],
         request.form['product_description'],
         int(request.form['weight_grams']),
@@ -106,6 +107,7 @@ def welcome():
         sender=ExternalSellerAgent.uri,
         receiver=vendor_agent.uri,
         msgcnt=get_new_msg_count(),
+        content=agn[product_id]
     )
 
     send_message(msg, vendor_agent.address)

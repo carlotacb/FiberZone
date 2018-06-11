@@ -22,19 +22,20 @@ import uuid
 from flask import Flask, request
 import sys
 import constants.FIPAACLPerformatives as performatives
-from AgentUtil.ACLMessages import build_message, get_message_properties
+from AgentUtil.ACLMessages import build_message, send_message, get_message_properties
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
 import requests
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 import constants.OntologyConstants as OntologyConstants
-from orderRequest import  OrderRequest
+from orderRequest import OrderRequest
 from rdflib.term import Literal
 import logging
-logging.basicConfig(level=logging.DEBUG)
 
+logging.basicConfig(level=logging.DEBUG)
 
 # Configuration stuff
 hostname = socket.gethostname()
@@ -48,16 +49,15 @@ mss_cnt = 0
 # Datos del Agente
 
 BuyerAgent = Agent('BuyerAgent',
-                       agn.BuyerAgent,
-                       'http://%s:%d/comm' % (hostname, port),
-                       'http://%s:%d/Stop' % (hostname, port))
+                   agn.BuyerAgent,
+                   'http://%s:%d/comm' % (hostname, port),
+                   'http://%s:%d/Stop' % (hostname, port))
 
 # Directory agent address
 DirectoryAgent = Agent('DirectoryAgent',
                        agn.Directory,
                        'http://%s:9000/Register' % hostname,
                        'http://%s:9000/Stop' % hostname)
-
 
 # Global triplestore graph
 dsgraph = Graph()
@@ -72,6 +72,7 @@ app = Flask(__name__)
 def welcome():
     return "BuyerAgent"
 
+
 @app.route("/comm")
 def comunicacion():
     """
@@ -85,12 +86,12 @@ def comunicacion():
     graph_message.parse(data=message)
     message_properties = get_message_properties(graph_message)
 
-    not_understood_message = lambda : build_message(
-            Graph(),
-            performatives.NOT_UNDERSTOOD,
-            sender=BuyerAgent.uri,
-            msgcnt=get_new_msg_count()
-        ).serialize(format='xml')
+    not_understood_message = lambda: build_message(
+        Graph(),
+        performatives.NOT_UNDERSTOOD,
+        sender=BuyerAgent.uri,
+        msgcnt=get_new_msg_count()
+    ).serialize(format='xml')
 
     if message_properties is None:
         return not_understood_message()
@@ -100,7 +101,6 @@ def comunicacion():
         subject=content,
         predicate=RDF.type
     )
-
 
     if action != OntologyConstants.ACTION_SEARCH_PRODUCTS:
         return not_understood_message()
@@ -155,11 +155,11 @@ def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_pri
             )
         }
     ''').substitute(dict(
-            min_price=min_price,
-            max_price=max_price,
-            brand=brand,
-            search_text=search_text
-        )
+        min_price=min_price,
+        max_price=max_price,
+        brand=brand,
+        search_text=search_text
+    )
     )
 
     return all_products.query(
@@ -170,6 +170,7 @@ def search_graph_products(brand='(.*)', search_text='(.*)', min_price=0, max_pri
             ns=agn,
         )
     )
+
 
 def get_new_msg_count():
     global mss_cnt
@@ -189,37 +190,53 @@ def stop():
     return "Parando Servidor"
 
 
-#el grafo G tiene que contener toda la informacion
-#necesaria para realizar el pedido
+# el grafo G tiene que contener toda la informacion
+# necesaria para realizar el pedido
 # por ejemplo, idPedido, idProducto, idPersona ...
-@app.route("/order/<idProd>")
-def newOrder(idProd):
+@app.route("/order/<idProds>")
+def newOrder(idProds):
     """
     Creates a new order with the idProd
     :return:
     """
-    print("Im in order func")
-
-    url ="http://" + hostname + ":" + "9012"+"/comm"
 
     #    flights_url = disIP.flights_IP + str(Constants.PORT_AFlights) + "/comm"
 
-    messageDataGo = OrderRequest(uuid.uuid4(), idProd)
-    gra = messageDataGo.to_graph()
+    #messageDataGo = OrderRequest(uuid.uuid4(), product_ids)
+    #gra = messageDataGo.to_graph()
 
-    dataContent = build_message(gra, Literal(performatives.REQUEST), Literal(OntologyConstants.SEND_BUY_ORDER)).serialize(
-        format='xml')
-    print("before send request ")
-#gr = send_message( build_message(gmess, perf=ACL.request, sender=InfoAgent.uri, receiver=DirectoryAgent.uri, content=reg_obj, msgcnt=mss_cnt),
-#DirectoryAgent.address)
+    product_ids = idProds.split(',')
+    order_id = uuid.uuid4()
+    order = agn['order_' + str(order_id)]
+    graph_message = Graph()
+    graph_message.add((order, RDF.type, Literal(OntologyConstants.ACTION_CREATE_ORDER)))
+    graph_message.add((order, agn.order_id, Literal(order_id)))
+    for product_id in product_ids:
+        graph_message.add((order, agn.product_id, Literal(product_id)))
+
+    vendor_agent = BuyerAgent.find_agent(DirectoryAgent, agn.VendorAgent)
+
+    message = build_message(
+        graph_message,
+        perf=Literal(performatives.REQUEST),
+        sender=BuyerAgent.uri,
+        receiver=vendor_agent.uri,
+        msgcnt=get_new_msg_count(),
+        content=order
+    )
+
+    response = send_message(message, vendor_agent.address)
+
+    print('resp is ', response)
+
+    return 'you gay'
+
+    # gr = send_message( build_message(gmess, perf=ACL.request, sender=InfoAgent.uri, receiver=DirectoryAgent.uri, content=reg_obj, msgcnt=mss_cnt),
+    # DirectoryAgent.address)
     resp = requests.post(url, data=dataContent)
 
-    print("im here, resp:")
-    print(resp)
-    print(resp.text)
 
     return resp.text
-
 
 
 def tidyup():
@@ -236,6 +253,7 @@ def agentbehavior1(cola):
 
     :return:
     """
+    BuyerAgent.register_agent(DirectoryAgent)
     pass
 
 
@@ -250,5 +268,3 @@ if __name__ == '__main__':
     # Esperamos a que acaben los behaviors
     ab1.join()
     print('The End')
-
-

@@ -7,7 +7,7 @@ from rdflib import Namespace, Graph
 from flask import Flask, request
 import uuid
 
-import constants.FIPAACLPerformatives as FIPAACLPerformatives
+import constants.FIPAACLPerformatives as performatives
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
@@ -70,14 +70,23 @@ def comunicacion():
     Entrypoint de comunicacion
     """
 
-    print("here VendorAgent comunicacion")
-    graph = Graph().parse(data=request.data)
-    print("obtenim order request")
-    order = OrderRequest.from_graph(graph)
+    message = request.args['content']
+    graph_message = Graph()
+    graph_message.parse(data=message)
+    message_properties = get_message_properties(graph_message)
 
-    message_properties = get_message_properties(graph)
+    not_understood_message = lambda: build_message(
+        Graph(),
+        performatives.NOT_UNDERSTOOD,
+        sender=VendorAgent.uri,
+        msgcnt=get_new_msg_count()
+    ).serialize(format='xml')
+
+    if message_properties is None:
+        return not_understood_message()
+
     content = message_properties['content']
-    action = graph.value(
+    action = graph_message.value(
         subject=content,
         predicate=RDF.type
     )
@@ -90,35 +99,48 @@ def comunicacion():
             return "devolución denegada por la tienda"
         return "devolución aceptada"
 
+    if action == OntologyConstants.ACTION_CREATE_ORDER:
+        return create_order(graph_message)
+
+    else:
+        return not_understood_message()
+
+
+def create_order(graph_message):
+    '''
     url = "http://" + hostname + ":" + "9011" + "/comm"
 
-    print("creem messageDataGo Pedido")
-    #uuid = identificador del pedido,
-    messageDataGo = PedidoRequest(order.uuid, [order.product_id, '345'], "peso", random.randint(1, 9999),
-                                  direccions[random.randint(0, 9)])
+        print("creem messageDataGo Pedido")
+        #uuid = identificador del pedido,
+        messageDataGo = PedidoRequest(order.uuid, [order.product_id, '345'], "peso", random.randint(1, 9999),
+                                      direccions[random.randint(0, 9)])
 
-    print("Llegim graph orders")
-    all_orders = Graph()
-    all_orders.parse('./rdf/database_orders.rdf')
-    print("Afegim order")
-    add_order(all_orders, messageDataGo.uuid, messageDataGo.product_ids, messageDataGo.uuid,
-              messageDataGo.peso, messageDataGo.cp_code, messageDataGo.direction)
-    print("Sobreescrivim base de dades")
-    all_orders.serialize('./rdf/database_orders.rdf')
+        print("Llegim graph orders")
+        all_orders = Graph()
+        all_orders.parse('./rdf/database_orders.rdf')
+        print("Afegim order")
+        add_order(all_orders, messageDataGo.uuid, messageDataGo.product_ids, messageDataGo.uuid,
+                  messageDataGo.peso, messageDataGo.cp_code, messageDataGo.direction)
+        print("Sobreescrivim base de dades")
+        all_orders.serialize('./rdf/database_orders.rdf')
 
-    print("creem messageDataGo graph")
-    gra = messageDataGo.to_graph()
-    #gra = order.to_graph()
-    print("creem la request")
-    print(gra.serialize(format='xml'))
+        print("creem messageDataGo graph")
+        gra = messageDataGo.to_graph()
+        #gra = order.to_graph()
+        print("creem la request")
+        print(gra.serialize(format='xml'))
 
-    dataContent = build_message(gra, Literal(FIPAACLPerformatives.REQUEST),
-                                Literal(OntologyConstants.SEND_PEDIDO)).serialize(format='xml')
+        dataContent = build_message(gra, Literal(performatives.REQUEST),
+                                    Literal(OntologyConstants.SEND_PEDIDO)).serialize(format='xml')
 
 
-    print("fem request")
-    resp = requests.post(url, data=dataContent)
-    return "asdf"
+        print("fem request")
+        resp = requests.post(url, data=dataContent)
+        return "asdf"
+    :param graph_message:
+    :return:
+    '''
+    return 'lol'
 
 def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction):
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
@@ -131,6 +153,11 @@ def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction):
     for product_id in product_ids:
         g.add((order, namespace.product_id, Literal(product_id)))
 
+
+def get_new_msg_count():
+    global mss_cnt
+    mss_cnt += 1
+    return mss_cnt
 
 def agentbehavior1(cola):
     """

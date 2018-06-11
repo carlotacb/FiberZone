@@ -14,7 +14,7 @@ class OrderRequest:
         graph = Graph()
         namespace = Namespace('ONTOLOGIA_ECSDI/')
         order = namespace.__getattr__('#RequestOrder#' + str(self.uuid))
-        graph.add((order, FOAF.Uuid, Literal(self.uuid)))
+        graph.add((order, FOAF.uuid, Literal(self.uuid)))
         graph.add((order, FOAF.product_id, Literal(self.product_id)))
         print("graf creat")
         return graph

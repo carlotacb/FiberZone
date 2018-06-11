@@ -1,6 +1,7 @@
 SEND_BUY_ORDER = "OrderRequest"
 SEND_PEDIDO = "PedidoRequest"
 ACTION_SEND_DEV = "DevRequest"
+ACTION_ADD_EXT = "AddExternalProduct"
 ACTION_SEARCH_PRODUCTS = 'action_search_products'
 QUERY = 'search_query'
 QUERY_BRAND = 'search_query_brand'

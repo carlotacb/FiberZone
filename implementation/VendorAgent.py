@@ -8,13 +8,14 @@ from flask import Flask, request
 import uuid
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
-from AgentUtil.ACLMessages import build_message
 from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
 import requests
 from rdflib import RDF
 from rdflib.namespace import FOAF
+from AgentUtil.ACLMessages import build_message, get_message_properties
+
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -23,6 +24,7 @@ import random, constants.OntologyConstants as OntologyConstants
 from orderRequest import  OrderRequest
 from pedidoRequest import  PedidoRequest
 from rdflib.term import Literal
+
 
 # Configuration stuff
 hostname = socket.gethostname()
@@ -61,15 +63,32 @@ logging.basicConfig(level=logging.INFO)
 ns = Namespace('ONTOLOGIA_ECSDI/')
 direccions = ["Barcelona", "Valencia", "Madrid", "Zaragoza", "Sevilla", "Tarragona", "Girona", "Lleida", "Castelldefels", "Na macaret"]
 
+
 @app.route('/comm', methods=['GET', 'POST'])
 def comunicacion():
     """
     Entrypoint de comunicacion
     """
+
     print("here VendorAgent comunicacion")
     graph = Graph().parse(data=request.data)
     print("obtenim order request")
     order = OrderRequest.from_graph(graph)
+
+    message_properties = get_message_properties(graph)
+    content = message_properties['content']
+    action = graph.value(
+        subject=content,
+        predicate=RDF.type
+    )
+
+    if action == OntologyConstants.ACTION_SEND_DEV:
+        s = ""
+        # aqui devolucion
+        ran = random.randint(0, 9)
+        if ran > 6:
+            return "devolución denegada por la tienda"
+        return "devolución aceptada"
 
     url = "http://" + hostname + ":" + "9011" + "/comm"
 

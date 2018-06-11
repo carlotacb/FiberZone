@@ -27,7 +27,7 @@ from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
 import requests
-
+import random
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -100,6 +100,7 @@ def comunicacion():
         subject=content,
         predicate=RDF.type
     )
+
 
     if action != OntologyConstants.ACTION_SEARCH_PRODUCTS:
         not_understood_message()

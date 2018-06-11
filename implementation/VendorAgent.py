@@ -113,11 +113,7 @@ def create_product(graph_message):
     idProducto = importe = peso = 0
     for s,p,o in graph_message:
         if str(p) == "http://ONTOLOGIA_ECSDI/seller":
-            print("o = ",str(o))
-            print("o = ",o)
             seller = str(o)
-            print("seller",seller)
-            print("seller2",str(seller))
         elif str(p) == "http://ONTOLOGIA_ECSDI/product_description":
             description = str(o)
         elif str(p) == "http://ONTOLOGIA_ECSDI/price_eurocents":

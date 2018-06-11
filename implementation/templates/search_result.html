@@ -1,0 +1,36 @@
+<html>
+<title>ECSDI STORE | Register product</title>
+<body>
+    <h1>Resultados</h1>
+    <br>
+    <table border="1px">
+        <tr>
+            <th></th>
+            <th><b>Name</b></th>
+            <th><b>Brand</b></th>
+            <th><b>Description</b></th>
+            <th><b>Category</b></th>
+            <th><b>Price</b></th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td><img height="128" width="128" src="{{ product.image }}"></td>
+            <td>{{ product.product_name }}</td>
+            <td>{{ product.brand }}</td>
+            <td>{{ product.product_description|safe }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.price_euros }} €</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+</body>
+</html>
+
+<style>
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+</style>

@@ -97,10 +97,10 @@ def comunicacion():
         return not_understood_message()
 
     content = message_properties['content']
-    action = graph_message.value(
+    action = str(graph_message.value(
         subject=content,
         predicate=RDF.type
-    )
+    ))
 
     if action != OntologyConstants.ACTION_SEARCH_PRODUCTS:
         return not_understood_message()

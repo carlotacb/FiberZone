@@ -27,13 +27,13 @@ from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
 import requests
-
 import logging
 logging.basicConfig(level=logging.DEBUG)
-
 import constants.OntologyConstants as OntologyConstants
 from orderRequest import  OrderRequest
 from rdflib.term import Literal
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 
 # Configuration stuff
@@ -101,8 +101,9 @@ def comunicacion():
         predicate=RDF.type
     )
 
+
     if action != OntologyConstants.ACTION_SEARCH_PRODUCTS:
-        not_understood_message()
+        return not_understood_message()
 
     query_graph = graph_message.objects(content, OntologyConstants.QUERY)
     query_dict = {}

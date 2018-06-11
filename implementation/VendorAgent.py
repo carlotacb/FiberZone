@@ -99,7 +99,7 @@ def comunicacion():
             return "devolución denegada por la tienda"
         return "devolución aceptada"
     elif str(action) == OntologyConstants.ACTION_CREATE_ORDER:
-        return create_order(graph_message)
+        return create_order(graph_message).serialize(format='xml')
     elif str(action) == OntologyConstants.ACTION_ADD_EXT:
         return create_product(graph_message)
     else:
@@ -109,15 +109,32 @@ def comunicacion():
 
 def create_product(graph_message):
     print(graph_message.serialize(format='xml'))
-    nombreProducto = ""
-    idProducto = 0
-    importe = 0
-    marca = ""
-    peso = 0
-    seller = ""
-    category = ""
-    description = "whats up bro this is fun"
-
+    nombreProducto = marca = seller = category = description = ""
+    idProducto = importe = peso = 0
+    for s,p,o in graph_message:
+        if str(p) == "http://ONTOLOGIA_ECSDI/seller":
+            print("o = ",str(o))
+            print("o = ",o)
+            seller = str(o)
+            print("seller",seller)
+            print("seller2",str(seller))
+        elif str(p) == "http://ONTOLOGIA_ECSDI/product_description":
+            description = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/price_eurocents":
+            importe = int(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/product_id":
+            idProducto = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/product_name":
+            nombreProducto = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/weight_grams":
+            peso = int(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/category":
+            category = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/brand":
+            marca = str(o)
+    print("seller = ",seller)
+    print("seller2 = ",str(seller))
+    print(seller,description,importe,idProducto,nombreProducto,peso,category,marca)
     print("Llegim graph productes dintre del if 55555")
     all_orders = Graph()
     all_orders.parse('./rdf/database_products.rdf')
@@ -126,46 +143,38 @@ def create_product(graph_message):
     print("Sobreescrivim base de dades de productes")
     all_orders.serialize('./rdf/database_products.rdf')
 
-    print("Llegim graph productes dintre del if")
-    all_orders = Graph()
-    all_orders.parse('./rdf/database_products.rdf')
-    print(all_orders.serialize(format='xml'))
+    return graph_message.serialize(format='xml')
 
 def create_order(graph_message):
-    '''
-    url = "http://" + hostname + ":" + "9011" + "/comm"
-
-        print("creem messageDataGo Pedido")
-        #uuid = identificador del pedido,
-        messageDataGo = PedidoRequest(order.uuid, [order.product_id, '345'], "peso", random.randint(1, 9999),
-                                      direccions[random.randint(0, 9)])
-
-        print("Llegim graph orders")
-        all_orders = Graph()
+    all_orders = Graph()
+    try:
         all_orders.parse('./rdf/database_orders.rdf')
-        print("Afegim order")
-        add_order(all_orders, messageDataGo.uuid, messageDataGo.product_ids, messageDataGo.uuid,
-                  messageDataGo.peso, messageDataGo.cp_code, messageDataGo.direction)
-        print("Sobreescrivim base de dades")
-        all_orders.serialize('./rdf/database_orders.rdf')
+    except:
+        print('Cannot read existing order database. Creating new one.')
+    subject = None
+    for s, p, o in graph_message:
+        if str(s).startswith(str(agn['order_'])) == False:
+            continue
+        if p == RDF.type:
+            subject = s
+            all_orders.add((s, p, agn.order))
+        else:
+            all_orders.add((s, p, o))
+    all_orders.add((subject, agn.cp_code, Literal(random.randint(1, 9999))))
+    all_orders.add((subject, agn.direction, Literal(direccions[random.randint(0, 9)])))
+    all_orders.serialize('./rdf/database_orders.rdf')
 
-        print("creem messageDataGo graph")
-        gra = messageDataGo.to_graph()
-        #gra = order.to_graph()
-        print("creem la request")
-        print(gra.serialize(format='xml'))
+    CLAgent = VendorAgent.find_agent(DirectoryAgent, agn.CLAgent)
 
-        dataContent = build_message(gra, Literal(performatives.REQUEST),
-                                    Literal(OntologyConstants.SEND_PEDIDO)).serialize(format='xml')
+    message = build_message(
+        graph_message,
+        Literal(performatives.REQUEST),
+        Literal(OntologyConstants.SEND_PEDIDO)
+    ).serialize(format='xml')
 
+    resp = requests.post(CLAgent.address, data=message)
 
-        print("fem request")
-        resp = requests.post(url, data=dataContent)
-        return "asdf"
-    :param graph_message:
-    :return:
-    '''
-    return 'lol'
+    return resp
 
 def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction, state):
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)

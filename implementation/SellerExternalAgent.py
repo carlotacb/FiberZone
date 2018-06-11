@@ -111,8 +111,9 @@ def welcome():
         content=agn[product_id]
     )
 
+    print("hey lets print")
     send_message(msg, vendor_agent.address)
-
+    print("hey already printed")
     return render_template('external_seller.html')
 
 def get_new_msg_count():

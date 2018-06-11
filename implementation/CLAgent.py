@@ -14,6 +14,7 @@ import socket
 import time
 from pedidoRequest import  PedidoRequest
 from AgentUtil.Agent import Agent
+from string import Template
 
 
 # Configuration stuff
@@ -84,25 +85,44 @@ def comunicacion():
     ahora += time.strftime("%c")
 
     graph = Graph().parse(data=request.data)
-    pedido = PedidoRequest.from_graph(graph)
 
-    #coger identificador y leer de la BD
-    identificador = pedido.uuid
-    print("Llegim graph orders")
-    all_orders = Graph()
-    all_orders.parse('./rdf/database_orders.rdf')
-    query = """SELECT ?x ?uuid ?product_id ?peso ?cp_code ?direction
-       WHERE {
-            ?x ns1:Uuid ?uuid.
-            ?x ns1:product_id ?product_id.
-            ?x ns1:peso ?peso.
-            ?x ns1:cp_code ?cp_code.
-            ?x ns1:direction ?direction.
-            FILTER( str(?uuid) = '""" + identificador + """' )
-       }
-    """
-    newOrder = all_orders.query(query)
-    print(newOrder.serialize(format='xml'))
+    product_ids = []
+
+    for s, p, o in graph:
+        if (p == agn.product_id):
+            product_ids.append(str(o))
+
+    all_products = Graph()
+    all_products.parse('./rdf/database_products.rdf')
+
+    weights = []
+    prices = []
+    query = Template('''
+        SELECT DISTINCT ?product ?weight_grams ?price_eurocents
+        WHERE {
+            ?product rdf:type ?type_prod .
+            ?product ns:product_id ?id .
+            ?product ns:weight_grams ?weight_grams .
+            ?product ns:price_eurocents ?price_eurocents .
+            FILTER (
+                ?product_id = $product_id
+            )
+        }
+    ''')
+
+    for product_id in product_ids:
+        all_products.query(
+            query.substitute(dict(product_id=product_id)),
+            initNs=dict(
+                rdf=RDF,
+                ns=agn,
+            )
+        )
+
+
+    return 'lol'
+    #new_order = all_orders.query(query)
+    #print(newOrder.serialize(format='xml'))
 
 
     print( 'Its a plan request')

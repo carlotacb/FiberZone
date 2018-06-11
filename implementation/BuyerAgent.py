@@ -225,9 +225,7 @@ def newOrder(idProds):
         content=order
     )
 
-    response = send_message(message, vendor_agent.address)
-
-    print('resp is ', response)
+    send_message(message, vendor_agent.address)
 
     return 'you gay'
 

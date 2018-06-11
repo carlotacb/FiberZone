@@ -2,7 +2,9 @@
 from imaplib import Literal
 import requests
 from flask import Flask, request, Response
-from rdflib import Graph
+from rdflib.namespace import FOAF
+from rdflib import Graph, Namespace, RDF
+from multiprocessing import Process, Queue
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
 import constants.OntologyConstants as OntologyConstants
@@ -11,6 +13,7 @@ from orderRequest import OrderRequest
 import socket
 import time
 from pedidoRequest import  PedidoRequest
+from AgentUtil.Agent import Agent
 
 
 # Configuration stuff
@@ -24,6 +27,47 @@ app = Flask(__name__)
 mensajeFecha = "Recibirás el pedido en 2 dias a partir de:"
 precioExtra1 = 0
 precioExtra2 = 0
+
+FOAF = Namespace('http://xmlns.com/foaf/0.1/')
+agn = Namespace(OntologyConstants.ONTOLOGY_URI)
+
+
+def update_state(uuid, state):
+    print('id:', uuid, 'state:', state)
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_orders.rdf')
+    query_update = """DELETE { ?order ns1:state 'pending' }
+    INSERT { ?order ns1:state '""" + state + """' }
+    WHERE
+    {
+        ?order ns1:uuid '""" + uuid + """'
+    }"""
+    print(query_update)
+    newOrder = all_orders.query(query_update,  initNs=dict(
+            foaf=FOAF,
+            rdf=RDF,
+            ns1=agn,
+        ))
+    print(newOrder.serialize(format='xml'))
+    return
+
+
+update_state('7951dc00-ef96-4387-957d-cbc371af7230', 'updated')
+
+cola1 = Queue()
+
+
+CLAgent = Agent('CLAgent',
+                       agn.CLAgent,
+                       'http://%s:%d/comm' % (hostname, port),
+                       'http://%s:%d/Stop' % (hostname, port))
+
+# Directory agent address
+DirectoryAgent = Agent('DirectoryAgent',
+                       agn.Directory,
+                       'http://%s:9000/Register' % hostname,
+                       'http://%s:9000/Stop' % hostname)
+
 
 @app.route('/comm', methods=['GET', 'POST'])
 def comunicacion():
@@ -101,5 +145,19 @@ def comunicacion():
     return order.product_id
 
 
+def agentbehavior1(cola):
+    """
+    Un comportamiento del agente
+
+    :return:
+    """
+
+    CLAgent.register_agent(DirectoryAgent)
+
+    pass
+
 if __name__ == '__main__':
+    ab1 = Process(target=agentbehavior1, args=(cola1,))
+    ab1.start()
+
     app.run(host=hostname, port=port, debug=True)

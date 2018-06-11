@@ -28,7 +28,7 @@ from rdflib.term import Literal
 hostname = socket.gethostname()
 port = 9012
 
-agn = Namespace("http://www.agentes.org#")
+agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
 # Contador de mensajes
 mss_cnt = 0
@@ -110,5 +110,20 @@ def add_order(g, order_id, product_id, uuid, peso, cp_code, direction):
     g.add((order, FOAF.direction, Literal(direction)))
     g.add((order, FOAF.weight_grams, Literal(peso)))
 
+
+def agentbehavior1(cola):
+    """
+    Un comportamiento del agente
+
+    :return:
+    """
+    VendorAgent.register_agent(DirectoryAgent)
+    pass
+
 if __name__ == '__main__':
+    ab1 = Process(target=agentbehavior1, args=(cola1,))
+    ab1.start()
+
     app.run(host=hostname, port=port, debug=True)
+
+    ab1.join()

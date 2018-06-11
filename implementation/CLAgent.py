@@ -5,6 +5,7 @@ from flask import Flask, request, Response
 from rdflib.namespace import FOAF
 from rdflib import Graph, Namespace, RDF
 from multiprocessing import Process, Queue
+from rdflib.term import Literal
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
 import constants.OntologyConstants as OntologyConstants
@@ -36,23 +37,26 @@ def update_state(uuid, state):
     print('id:', uuid, 'state:', state)
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
-    query_update = """DELETE { ?order ns1:state 'pending' }
-    INSERT { ?order ns1:state '""" + state + """' }
+    '''query_update = """DELETE { ?order ns1:state 'pending' }
     WHERE
     {
         ?order ns1:uuid '""" + uuid + """'
     }"""
-    print(query_update)
-    newOrder = all_orders.query(query_update,  initNs=dict(
+    print(query_update)'''
+    namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
+    order = namespace.__getattr__('#RequestOrder#' + uuid)
+    all_orders.set((order, namespace.state, Literal(state)))
+    all_orders.serialize('./rdf/database_orders.rdf')
+    '''newOrder = all_orders.update(query_update,  initNs=dict(
             foaf=FOAF,
             rdf=RDF,
             ns1=agn,
-        ))
-    print(newOrder.serialize(format='xml'))
+        ))'''
+    print(all_orders.serialize(format='xml'))
     return
 
 
-update_state('7951dc00-ef96-4387-957d-cbc371af7230', 'updated')
+update_state('52c823c3-0622-4fd5-aacd-95769ed75991', 'updated')
 
 cola1 = Queue()
 

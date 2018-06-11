@@ -90,6 +90,11 @@ def comunicacion():
             return "devolución denegada por la tienda"
         return "devolución aceptada"
 
+    if action == OntologyConstants.ACTION_ADD_EXT:
+        #añadir producto
+        #los parametros estaran en el graph
+        s = ""
+
     url = "http://" + hostname + ":" + "9011" + "/comm"
 
     print("creem messageDataGo Pedido")

@@ -38,7 +38,7 @@ from rdflib.term import Literal
 
 # Configuration stuff
 hostname = socket.gethostname()
-port = 9010
+port = 9015
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
@@ -103,7 +103,7 @@ def welcome():
 
     msg = build_message(
         new_product,
-        perf=performatives.REQUEST,
+        perf=Literal(performatives.REQUEST),
         sender=ExternalSellerAgent.uri,
         receiver=vendor_agent.uri,
         msgcnt=get_new_msg_count(),

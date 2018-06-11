@@ -98,16 +98,38 @@ def comunicacion():
         if ran > 6:
             return "devolución denegada por la tienda"
         return "devolución aceptada"
-
-    if action == OntologyConstants.ACTION_ADD_EXT:
-        #añadir producto
-        #los parametros estaran en el graph
-        s = ""
     if action == OntologyConstants.ACTION_CREATE_ORDER:
         return create_order(graph_message)
+    if action == OntologyConstants.ACTION_ADD_EXT:
+        return create_product(graph_message)
     else:
         return not_understood_message()
 
+
+
+def create_product(graph_message):
+    print(graph_message.serialize(format='xml'))
+    nombreProducto = ""
+    idProducto = 0
+    importe = 0
+    marca = ""
+    peso = 0
+    seller = ""
+    category = ""
+    description = "whats up bro this is fun"
+
+    print("Llegim graph productes dintre del if 55555")
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_products.rdf')
+    print("Afegim producte")
+    add_product(all_orders, nombreProducto, idProducto, importe, marca, peso, seller, category, description)
+    print("Sobreescrivim base de dades de productes")
+    all_orders.serialize('./rdf/database_products.rdf')
+
+    print("Llegim graph productes dintre del if")
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_products.rdf')
+    print(all_orders.serialize(format='xml'))
 
 def create_order(graph_message):
     '''
@@ -163,6 +185,18 @@ def get_new_msg_count():
     mss_cnt += 1
     return mss_cnt
 
+def add_product(g, nombreProducto, idProducto, importe, marca, peso, seller, category, description):
+    namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
+    product = namespace.__getattr__('#AddExternal#' + str(idProducto))
+    g.add((product, RDF.type, Literal('ONTOLOGIA_ECSDI/')))
+    g.add((product, namespace.price_eurocents, Literal(importe)))
+    g.add((product, namespace.category, Literal(category)))
+    g.add((product, namespace.seller, Literal(seller)))
+    g.add((product, namespace.product_name, Literal(nombreProducto)))
+    g.add((product, namespace.product_description, Literal(description)))
+    g.add((product, namespace.brand, Literal(marca)))
+    g.add((product, namespace.weight_grams, Literal(peso)))
+
 def agentbehavior1(cola):
     """
     Un comportamiento del agente
@@ -176,6 +210,6 @@ if __name__ == '__main__':
     ab1 = Process(target=agentbehavior1, args=(cola1,))
     ab1.start()
 
-    app.run(host=hostname, port=port, debug=True)
+    app.run(host=hostname, port=port)
 
     ab1.join()

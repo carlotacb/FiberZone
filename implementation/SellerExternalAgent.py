@@ -69,7 +69,6 @@ app = Flask(__name__, template_folder='./templates')
 
 
 def add_product_to_graph(g, product_id, product_name, product_description, weight_grams, brand, price, category, seller):
-    g.add((agn[product_id], RDF.type, Literal(OntologyConstants.ONTOLOGY_URI+'product')))
     g.add((agn[product_id], agn.product_name, Literal(product_name)))
     g.add((agn[product_id], agn.product_id, Literal(product_id)))
     g.add((agn[product_id], agn.product_description, Literal(product_description)))
@@ -84,11 +83,11 @@ def welcome():
     if request.method == 'GET':
         return render_template('external_seller.html')
 
-    new_product = Graph()
+    message = Graph()
 
     product_id = uuid.uuid4()
     add_product_to_graph(
-        new_product,
+        message,
         product_id,
         request.form['product_name'],
         request.form['product_description'],
@@ -99,10 +98,12 @@ def welcome():
         request.form['seller']
     )
 
+    message.add((agn[product_id], RDF.type, Literal(OntologyConstants.ACTION_ADD_EXT)))
+
     vendor_agent = ExternalSellerAgent.find_agent(DirectoryAgent, agn.VendorAgent)
 
     msg = build_message(
-        new_product,
+        message,
         perf=Literal(performatives.REQUEST),
         sender=ExternalSellerAgent.uri,
         receiver=vendor_agent.uri,

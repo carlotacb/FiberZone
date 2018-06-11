@@ -2,9 +2,9 @@
 from imaplib import Literal
 import requests
 from flask import Flask, request, Response
-from rdflib import Namespace, Graph, RDF
 from rdflib.namespace import FOAF
-from rdflib.term import Literal
+from rdflib import Graph, Namespace, RDF
+from multiprocessing import Process, Queue
 
 import constants.FIPAACLPerformatives as FIPAACLPerformatives
 import constants.OntologyConstants as OntologyConstants
@@ -13,6 +13,7 @@ from orderRequest import OrderRequest
 import socket
 import time
 from pedidoRequest import  PedidoRequest
+from AgentUtil.Agent import Agent
 
 
 # Configuration stuff
@@ -52,6 +53,20 @@ def update_state(uuid, state):
 
 
 update_state('7951dc00-ef96-4387-957d-cbc371af7230', 'updated')
+
+cola1 = Queue()
+
+
+CLAgent = Agent('CLAgent',
+                       agn.CLAgent,
+                       'http://%s:%d/comm' % (hostname, port),
+                       'http://%s:%d/Stop' % (hostname, port))
+
+# Directory agent address
+DirectoryAgent = Agent('DirectoryAgent',
+                       agn.Directory,
+                       'http://%s:9000/Register' % hostname,
+                       'http://%s:9000/Stop' % hostname)
 
 
 @app.route('/comm', methods=['GET', 'POST'])
@@ -130,5 +145,19 @@ def comunicacion():
     return order.product_id
 
 
+def agentbehavior1(cola):
+    """
+    Un comportamiento del agente
+
+    :return:
+    """
+
+    CLAgent.register_agent(DirectoryAgent)
+
+    pass
+
 if __name__ == '__main__':
+    ab1 = Process(target=agentbehavior1, args=(cola1,))
+    ab1.start()
+
     app.run(host=hostname, port=port, debug=True)

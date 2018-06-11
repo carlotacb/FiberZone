@@ -109,15 +109,32 @@ def comunicacion():
 
 def create_product(graph_message):
     print(graph_message.serialize(format='xml'))
-    nombreProducto = ""
-    idProducto = 0
-    importe = 0
-    marca = ""
-    peso = 0
-    seller = ""
-    category = ""
-    description = "whats up bro this is fun"
-
+    nombreProducto = marca = seller = category = description = ""
+    idProducto = importe = peso = 0
+    for s,p,o in graph_message:
+        if str(p) == "http://ONTOLOGIA_ECSDI/seller":
+            print("o = ",str(o))
+            print("o = ",o)
+            seller = str(o)
+            print("seller",seller)
+            print("seller2",str(seller))
+        elif str(p) == "http://ONTOLOGIA_ECSDI/product_description":
+            description = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/price_eurocents":
+            importe = int(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/product_id":
+            idProducto = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/product_name":
+            nombreProducto = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/weight_grams":
+            peso = int(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/category":
+            category = str(o)
+        elif str(p) == "http://ONTOLOGIA_ECSDI/brand":
+            marca = str(o)
+    print("seller = ",seller)
+    print("seller2 = ",str(seller))
+    print(seller,description,importe,idProducto,nombreProducto,peso,category,marca)
     print("Llegim graph productes dintre del if 55555")
     all_orders = Graph()
     all_orders.parse('./rdf/database_products.rdf')
@@ -126,10 +143,7 @@ def create_product(graph_message):
     print("Sobreescrivim base de dades de productes")
     all_orders.serialize('./rdf/database_products.rdf')
 
-    print("Llegim graph productes dintre del if")
-    all_orders = Graph()
-    all_orders.parse('./rdf/database_products.rdf')
-    print(all_orders.serialize(format='xml'))
+    return graph_message.serialize(format='xml')
 
 def create_order(graph_message):
     '''

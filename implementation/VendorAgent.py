@@ -99,9 +99,12 @@ def comunicacion():
             return "devolución denegada por la tienda"
         return "devolución aceptada"
 
+    if action == OntologyConstants.ACTION_ADD_EXT:
+        #añadir producto
+        #los parametros estaran en el graph
+        s = ""
     if action == OntologyConstants.ACTION_CREATE_ORDER:
         return create_order(graph_message)
-
     else:
         return not_understood_message()
 
@@ -142,7 +145,7 @@ def create_order(graph_message):
     '''
     return 'lol'
 
-def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction):
+def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction, state):
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
     order = namespace.__getattr__('#RequestOrder#' + str(order_id))
     g.add((order, RDF.type, Literal('ONTOLOGIA_ECSDI/order')))
@@ -150,6 +153,7 @@ def add_order(g, order_id, product_ids, uuid, peso, cp_code, direction):
     g.add((order, namespace.cp_code, Literal(cp_code)))
     g.add((order, namespace.direction, Literal(direction)))
     g.add((order, namespace.weight_grams, Literal(peso)))
+    g.add((order, namespace.state, Literal(state)))
     for product_id in product_ids:
         g.add((order, namespace.product_id, Literal(product_id)))
 

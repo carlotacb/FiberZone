@@ -94,8 +94,8 @@ def crear_lote(prices_eurocents, weights):
 
 
 def send_pedido(prices_eurocents, weights):
-    prices = 10
-    return prices
+    prices_eurocents = prices_eurocents[1] + random.randint(0, 50)
+    return prices_eurocents
 
 
 

@@ -50,7 +50,9 @@ def update_state(uuid, state):
     return
 
 
-def crear_lote(g, prices_eurocents, weights):
+def crear_lote(prices_eurocents, weights):
+    g = Graph()
+    g.parse('rdf/database_lotes.rdf')
     all_orders = Graph()
     all_orders.parse('./rdf/database_orders.rdf')
     namespace = Namespace(OntologyConstants.ONTOLOGY_URI)
@@ -92,8 +94,8 @@ def crear_lote(g, prices_eurocents, weights):
 
 
 def send_pedido(prices_eurocents, weights):
-    prices_eurocents = prices_eurocents + random.randint(0, 50)
-    return prices_eurocents
+    prices = 10
+    return prices
 
 
 

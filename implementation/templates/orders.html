@@ -1,0 +1,34 @@
+<html>
+<title>ECSDI STORE | Register product</title>
+<body>
+    <h1>Pedidos</h1>
+    <br>
+    <table border="1px">
+        <tr>
+            <th><b>ID</b></th>
+            <th><b>Dirección</b></th>
+            <th><b>Código Postal</b></th>
+            <th><b>Status</b></th>
+            <th><b>Productos</b></th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.order_id }}</td>
+            <td>{{ order.direction }}</td>
+            <td>{{ order.cp_code }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.product_ids }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+</body>
+</html>
+
+<style>
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+</style>

@@ -6,6 +6,7 @@
     <table border="1px">
         <tr>
             <th></th>
+            <th><b>Product ID</b></th>
             <th><b>Name</b></th>
             <th><b>Brand</b></th>
             <th><b>Description</b></th>
@@ -15,6 +16,7 @@
         {% for product in products %}
         <tr>
             <td><img height="128" width="128" src="{{ product.image }}"></td>
+            <td>{{ product.product_id}}</td>
             <td>{{ product.product_name }}</td>
             <td>{{ product.brand }}</td>
             <td>{{ product.product_description|safe }}</td>

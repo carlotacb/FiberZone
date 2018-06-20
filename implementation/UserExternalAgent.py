@@ -91,9 +91,7 @@ def welcome():
 
     message.add((search, RDF.type, Literal(OntologyConstants.ACTION_SEARCH_PRODUCTS)))
 
-    print('lol fuck')
     BuyerAgent = ExternalUserAgent.find_agent(DirectoryAgent, agn.BuyerAgent)
-    print('you have agent or what')
 
     msg = build_message(
         message,

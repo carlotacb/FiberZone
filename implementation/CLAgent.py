@@ -1,7 +1,7 @@
 # coding=utf-8
 from imaplib import Literal
 import requests
-from flask import Flask, request, Response
+from flask import Flask, request, Response, render_template
 from rdflib.namespace import FOAF
 from rdflib import Graph, Namespace, RDF
 from multiprocessing import Process, Queue
@@ -29,7 +29,7 @@ Lote = [] #cada 5 se vacia el lote y se envia
 
 precioBase = 10
 precioFinal = 0
-app = Flask(__name__)
+app = Flask(__name__, template_folder='./templates')
 mensajeFecha = "Recibirás el pedido en 2 dias a partir de:"
 precioExtra1 = 0
 precioExtra2 = 0
@@ -168,6 +168,28 @@ def get_prices_weights_from_orders_graph(graph):
     return get_prices_weights_from_product_ids(product_ids)
 
 
+
+@app.route("/user_orders", methods=['GET'])
+def get_orders():
+    all_orders = Graph()
+    all_orders.parse('./rdf/database_orders.rdf')
+
+    orders = []
+    for db_order in all_orders.subjects(RDF.type, agn.order):
+        order = dict(
+            order_id=str(all_orders.value(subject=db_order, predicate=agn.order_id)),
+            direction=str(all_orders.value(subject=db_order, predicate=agn.direction)),
+            cp_code=str(all_orders.value(subject=db_order, predicate=agn.cp_code)),
+            status=str(all_orders.value(subject=db_order, predicate=agn.state)),
+            product_ids=[],
+        )
+        for product_id in all_orders.objects(db_order, agn.product_id):
+            order['product_ids'].append(str(product_id))
+        orders.append(order)
+
+    return render_template('orders.html', orders=sorted(orders, key=lambda k: k['order_id']))
+
+
 @app.route('/comm', methods=['GET', 'POST'])
 def comunicacion():
     """
@@ -258,4 +280,6 @@ if __name__ == '__main__':
     ab1 = Process(target=agentbehavior1, args=(cola1,))
     ab1.start()
 
-    app.run(host=hostname, port=port, debug=True)
+    app.run(host=hostname, port=port)
+
+    ab1.join()

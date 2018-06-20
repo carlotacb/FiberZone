@@ -231,9 +231,12 @@ def newOrder(idProds):
         content=order
     )
 
-    send_message(message, vendor_agent.address)
+    try:
+        send_message(message, vendor_agent.address)
+    except Exception as e:
+        print('owned error', str(e))
 
-    return 'you gay'
+    return 'Pedido creado'
 
     # gr = send_message( build_message(gmess, perf=ACL.request, sender=InfoAgent.uri, receiver=DirectoryAgent.uri, content=reg_obj, msgcnt=mss_cnt),
     # DirectoryAgent.address)

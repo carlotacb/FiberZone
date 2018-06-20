@@ -30,6 +30,9 @@ from rdflib.term import Literal
 hostname = '0.0.0.0'
 port = 9012
 
+import os
+directory_hostname = os.environ['DIRECTORY_HOST'] or hostname
+
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
 # Contador de mensajes
@@ -45,8 +48,8 @@ VendorAgent = Agent('VendorAgent',
 # Directory agent address
 DirectoryAgent = Agent('DirectoryAgent',
                        agn.Directory,
-                       'http://%s:9000/Register' % hostname,
-                       'http://%s:9000/Stop' % hostname)
+                       'http://%s:9000/Register' % directory_hostname,
+                       'http://%s:9000/Stop' % directory_hostname)
 
 
 # Global triplestore graph

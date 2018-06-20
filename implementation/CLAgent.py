@@ -23,9 +23,13 @@ import random
 
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9011
 Lote = [] #cada 5 se vacia el lote y se envia
+
+
+import os
+directory_hostname = os.environ['DIRECTORY_HOST'] or hostname
 
 precioBase = 10
 precioFinal = 0
@@ -119,8 +123,8 @@ CLAgent = Agent('CLAgent',
 # Directory agent address
 DirectoryAgent = Agent('DirectoryAgent',
                        agn.Directory,
-                       'http://%s:9000/Register' % hostname,
-                       'http://%s:9000/Stop' % hostname)
+                       'http://%s:9000/Register' % directory_hostname,
+                       'http://%s:9000/Stop' % directory_hostname)
 
 
 def get_prices_weights_from_product_ids(product_ids):

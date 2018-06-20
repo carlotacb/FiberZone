@@ -5,7 +5,7 @@ from flask import Flask, request, Response
 
 
 import socket
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9013
 app = Flask(__name__)
 

@@ -37,8 +37,12 @@ from rdflib.term import Literal
 
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9016
+
+import os
+directory_hostname = os.environ['DIRECTORY_HOST'] or hostname
+
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
@@ -55,8 +59,8 @@ ExternalUserAgent = Agent('ExternalUserAgent',
 # Directory agent address
 DirectoryAgent = Agent('DirectoryAgent',
                        agn.Directory,
-                       'http://%s:9000/Register' % hostname,
-                       'http://%s:9000/Stop' % hostname)
+                       'http://%s:9000/Register' % directory_hostname,
+                       'http://%s:9000/Stop' % directory_hostname)
 
 
 # Global triplestore graph

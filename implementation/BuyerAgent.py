@@ -38,8 +38,12 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9010
+
+
+import os
+directory_hostname = os.environ['DIRECTORY_HOST'] or hostname
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)
 
@@ -56,8 +60,8 @@ BuyerAgent = Agent('BuyerAgent',
 # Directory agent address
 DirectoryAgent = Agent('DirectoryAgent',
                        agn.Directory,
-                       'http://%s:9000/Register' % hostname,
-                       'http://%s:9000/Stop' % hostname)
+                       'http://%s:9000/Register' % directory_hostname,
+                       'http://%s:9000/Stop' % directory_hostname)
 
 # Global triplestore graph
 dsgraph = Graph()
@@ -227,9 +231,12 @@ def newOrder(idProds):
         content=order
     )
 
-    send_message(message, vendor_agent.address)
+    try:
+        send_message(message, vendor_agent.address)
+    except Exception as e:
+        print('owned error', str(e))
 
-    return 'you gay'
+    return 'Pedido creado'
 
     # gr = send_message( build_message(gmess, perf=ACL.request, sender=InfoAgent.uri, receiver=DirectoryAgent.uri, content=reg_obj, msgcnt=mss_cnt),
     # DirectoryAgent.address)

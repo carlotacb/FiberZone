@@ -37,7 +37,7 @@ from rdflib.term import Literal
 
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9016
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)

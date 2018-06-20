@@ -27,6 +27,7 @@ from AgentUtil.FlaskServer import shutdown_server
 from AgentUtil.OntoNamespaces import ACL
 from AgentUtil.Agent import Agent
 import requests
+import os
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -37,7 +38,7 @@ from rdflib.term import Literal
 
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9015
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)

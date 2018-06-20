@@ -38,7 +38,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9010
 
 agn = Namespace(OntologyConstants.ONTOLOGY_URI)

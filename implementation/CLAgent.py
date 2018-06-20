@@ -23,7 +23,7 @@ import random
 
 
 # Configuration stuff
-hostname = socket.gethostname()
+hostname = '0.0.0.0'
 port = 9011
 Lote = [] #cada 5 se vacia el lote y se envia
 
